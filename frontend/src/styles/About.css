@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+.about-container {
+  max-width: auto;
+  margin: 0;
+  padding: 0;
+}
+.tagline-head{
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tagline{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+  width: 85%;
+  border:10px solid transparent;
+  position: relative;
+}
+.tagline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;  /* Adjust size as needed */
+  height: 200px;
+  border-top: 10px solid rgb(168, 90, 108);
+  border-left: 10px solid rgb(168, 90, 108);
+}
+
+/* Bottom-right border */
+.tagline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;  /* Adjust size as needed */
+  height: 200px;
+  border-bottom: 10px solid rgb(168, 90, 108);
+  border-right: 10px solid rgb(168, 90, 108);
+}
+.tagline h1{
+  margin-top: 50px;
+  font-size: 2.5rem;
+  font-family: 'Merriweather', serif;
+  width: 70%; 
+  
+
+}
+.tagline p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: 20px 0 20px 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.about-section-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 50%;
+  height: 60vh;
+  background-image: url('../assets/images/food2.PNG');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.about-section-main .about-section-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.about-section-main .about-section-1 h2 {
+
+  font-size: 4rem;
+  font-family: "Lora:ital";
+  margin: 0 ;
+  
+}
+
+.about-section-h2 h6{
+  margin-top: 90px;
+} 
+.about-section-h2 h2{
+  margin-bottom: 20px;
+
+}
+
+ .about-section-h2 h4{
+  
+  font-size: 15px;
+  color: black;
+  margin-right: 20px;
+}
+.about-section-2 {
+  display: flex;
+  width: 100%;
+  padding: 50px 10px 50px 50px;
+  height: 80vh;
+  justify-content: space-between;
+  
+  
+}
+.about-img{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 20px 10px 10px; 
+}
+.about-img img{
+  height: 55vh;
+  width: 90%;
+}
+
+.about-content-1 {
+  width: 50%;
+
+}
+.about-content-1 h2{
+  font-size: 3.5rem;
+  font-family: 'Merriweather', serif;
+  margin:40px 0 20px 0;
+  max-width: 100%;
+  line-height: 70px;
+}
+.about-content-1 p{
+  font-size: 15px;
+  max-width: 100%;
+  margin: 0  40px 20px 0 ;
+
+}
+.about-section-h2 h2{
+font-family: 'Merriweather', serif;
+font-size: 3rem;
+max-width: 400px;
+}
+.review-section{
+  display: flex;
+
+}
+
+/* Media Query for Tablets and Mobiles (max-width: 768px) */
+@media (max-width: 768px) {
+  .about-section-main {
+    height: 40vh; /* Reduced height */
+  }
+
+  .about-section-main .about-section-1 h2 {
+    font-size: 2.5rem; /* Reduced font size */
+  }
+
+  .tagline-head {
+    margin-top: 30px; /* Reduced margin */
+  }
+
+  .tagline h1 {
+    font-size: 1.8rem; /* Reduced font size */
+    width: 90%; /* Increased width for better fit */
+    margin-top: 20px;
+  }
+
+  .tagline p {
+    font-size: 16px; /* Reduced font size */
+    width: 90%;
+    margin: 10px 0;
+  }
+
+  .tagline::before,
+  .tagline::after {
+    width: 150px; /* Further reduced size */
+    height: 100px;
+    border-width: 6px; /* Reduced border thickness */
+  }
+
+  .about-section-2 {
+    flex-direction: column; /* Stack content vertically */
+    height: auto; /* Allow height to adjust */
+    padding: 20px; /* Reduced padding */
+  }
+
+  .about-img {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .about-img img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .about-content-1 {
+    width: 100%;
+  }
+
+  .about-content-1 h2 {
+    font-size: 2rem; /* Reduced font size */
+    line-height: 40px; /* Adjusted line height */
+    margin: 20px 0;
+  }
+
+  .about-content-1 p {
+    font-size: 14px; /* Reduced font size */
+    margin: 0 0 20px 0;
+  }
+
+  .about-section-h2 h6 {
+    margin-top: 30px; /* Reduced margin */
+    text-align: center;
+  }
+
+  .about-section-h2 h2 {
+    font-size: 2rem; /* Reduced font size */
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .about-section-h2 h4 {
+    font-size: 14px; /* Reduced font size */
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .about-btn {
+    display: flex;
+    justify-content: center;
+    width: 50%; /* Adjusted for mobile */
+    margin: 20px auto;
+  }
+
+  .review-section {
+    padding: 10px; 
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,70 @@
+.admin-dashboard {
+    padding: 2rem;
+  }
+  
+  .admin-dashboard h1 {
+    font-size: 2rem;
+    color: #4A5568;
+    margin-bottom: 1rem;
+  }
+  
+  .admin-dashboard h2 {
+    font-size: 1.5rem;
+    color: #4A5568;
+    margin-bottom: 1rem;
+  }
+  
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .bookings-table th,
+  .bookings-table td {
+    border: 1px solid #E2E8F0;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  .bookings-table th {
+    background-color: #EDF2F7;
+    font-weight: bold;
+    color: #4A5568;
+  }
+  
+  .bookings-table tr:nth-child(even) {
+    background-color: #F7FAFC;
+  }
+  
+  .bookings-table select {
+    padding: 0.25rem;
+    border-radius: 4px;
+    border: 1px solid #CBD5E0;
+  }
+  
+  .admin-dashboard.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    color: #4A5568;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-dashboard {
+      padding: 1rem;
+    }
+  
+    .bookings-table {
+      font-size: 0.875rem;
+    }
+  
+    .bookings-table th,
+    .bookings-table td {
+      padding: 0.5rem;
+    }
+  }
+  
+  
