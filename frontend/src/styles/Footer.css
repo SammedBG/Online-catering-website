@@ -1,0 +1,176 @@
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0;
+  position: relative;
+}
+
+.container-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-f {
+  margin-bottom: 20px;
+}
+
+.logo-ff {
+  width: 120px;
+  height: auto;
+  background: white;
+  padding: 0px;
+  transform: scale(1);
+}
+
+.para-1 {
+  max-width: 400px;
+  margin-bottom: 25px;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.icons-f {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.icons-f a {
+  background-color: #222222;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 25px;
+}
+
+.icons-f a:hover {
+  background-color: rgb(212, 143, 58);
+}
+
+.address {
+  margin: 50px 20px 0 20px;
+}
+
+.address h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.para-2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+  color: #cccccc;
+}
+
+.para-2 i {
+  color: #E5B06A;
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.para-2 p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.para-2 a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.para-2 a:hover {
+  color: #E5B06A;
+}
+
+.container>p {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #333333;
+  text-align: center;
+  color: #999999;
+  font-size: 14px;
+}
+
+.container>p b {
+  color: #ffffff;
+}
+
+.footer-line {
+  text-align: center;
+}
+
+.footer-line b {
+  color: #E5B06A;
+}
+
+.footer-content-3 {
+  margin: 20px 20px 0 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 0;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .para-1 {
+    max-width: 100%;
+  }
+
+  .icons-f {
+    margin-bottom: 30px;
+  }
+
+  .address {
+    margin-top: 30px;
+  }
+  .container-footer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}
+
+/* Marquee Banner - Add this if you want the scrolling banner from the image */
+.marquee-banner {
+  background-color: #8B1D3D;
+  color: white;
+  padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 20px;
+  width: 100%;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content span {
+  margin: 0 15px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

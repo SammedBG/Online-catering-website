@@ -1,0 +1,130 @@
+.menu-section-2{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 50px;
+  align-items: center;
+
+
+}
+
+.menu-cards{
+  background-color: antiquewhite;
+  width: 50%;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: 6px 7px 6px 2px rgb(0,0,0,0.2);
+}
+
+.menu-content{
+  padding: 40px;
+}
+
+.menu-image img{
+width: 100%;
+height: auto;
+border-radius: 20px;
+}
+
+.custmized-menu{
+  text-align: center;
+  
+  background-color: rgb(254, 254, 254);
+  height: 50vh;
+  margin: 30px;
+  padding: 30px;
+  border-radius: 15px;
+}
+.custmized-menu h1{
+ font-size: 45px;
+ margin-bottom: 30px;
+  color: rgb(19, 19, 19);
+}
+
+.custmized-menu h6{
+  font-size: 20px;
+  color: rgb(20, 20, 20);
+}
+.pdf-down{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wedding{
+display: flex;
+align-items: center;
+border: 2px solid black;
+width:60%;
+height: 20vh;
+padding: 25px;
+border-radius: 12px;
+margin: 20px;
+}
+
+.wedding h1{
+  font-family: 'Merriweather', serif;
+  font-size: 40px; 
+}
+.wedding i{
+  font-size: 50px;
+  margin-left:300px ;
+}
+.wedding a{
+  color: black;
+text-decoration: none;
+}
+@media (max-width: 768px) {
+  .menu-section-2 {
+    flex-direction: column; /* Stack cards vertically */
+    padding: 20px; /* Reduce padding */
+  }
+
+  .menu-cards {
+    width: 100%; /* Full width on mobile */
+    margin: 5px 0; /* Reduce margin */
+  }
+
+  .menu-content {
+    padding: 20px; /* Reduce padding */
+  }
+
+  .custmized-menu {
+    height: auto; /* Allow height to adjust */
+    margin: 15px; /* Reduce margin */
+    padding: 15px; /* Reduce padding */
+  }
+
+  .custmized-menu h1 {
+    font-size: 28px; /* Reduce font size */
+    margin-bottom: 15px; /* Reduce margin */
+  }
+
+  .custmized-menu h6 {
+    font-size: 16px; /* Reduce font size */
+  }
+
+  .pdf-down {
+    padding: 10px; /* Add some padding */
+  }
+
+  .wedding {
+    width: 90%; /* Increase width for better fit */
+    height: auto; /* Adjust height dynamically */
+    padding: 15px; /* Reduce padding */
+    margin: 10px; /* Reduce margin */
+    flex-direction: column; /* Stack items vertically */
+    text-align: center;
+  }
+
+  .wedding h1 {
+    font-size: 24px; /* Reduce font size */
+  }
+
+  .wedding i {
+    font-size: 30px; /* Reduce icon size */
+    margin-left: 0; /* Remove margin for centered layout */
+    margin-top: 10px; /* Add spacing above icon */
+  }
+}
