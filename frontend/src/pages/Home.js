@@ -80,7 +80,6 @@ const Home = () => {
         </div>
       </div>
       <div className="home-content">
-
         <div className="home-section about-section">
 
           <div>
