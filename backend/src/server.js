@@ -15,7 +15,10 @@ const app = express();
 const httpServer = createServer(app);
 
 // Set allowed origin
-const allowedOrigins = [process.env.FRONTEND_URL];
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // Make sure this matches the frontend URL exactly without trailing slashes
+  "https://sachincateringservices.vercel.app" // If using multiple URLs
+];
 
 // Socket.IO CORS Configuration
 const io = new Server(httpServer, {
