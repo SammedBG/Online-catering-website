@@ -1,68 +1,80 @@
-import express from "express"
-import mongoose from "mongoose"
-import cors from "cors"
-import dotenv from "dotenv"
-import { createServer } from "http"
-import { Server } from "socket.io"
-import authRoutes from "./routes/auth.js"
-import bookingRoutes from "./routes/booking.js"
-import adminRoutes from "./routes/Admin.js"
-import reviewRoutes from "./routes/review.js"
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import authRoutes from "./routes/auth.js";
+import bookingRoutes from "./routes/booking.js";
+import adminRoutes from "./routes/admin.js";
+import reviewRoutes from "./routes/review.js";
 
+dotenv.config();
 
-dotenv.config()
+const app = express();
+const httpServer = createServer(app);
 
-const app = express()
-const httpServer = createServer(app)
+// Allowed origins (without trailing slash)
+const allowedOrigins = [process.env.FRONTEND_URL]; 
+
+// Socket.IO CORS Configuration
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,  // Allow credentials if required
   },
-})
+});
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware for handling CORS
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  }),
-)
-app.use(express.json())
+    origin: function (origin, callback) {
+      // Allow requests from the allowed origin
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,  // Allow credentials if required
+  })
+);
+
+app.use(express.json());
 
 // Database connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-// Socket.IO
+// Socket.IO connection
 io.on("connection", (socket) => {
-  console.log("A user connected")
+  console.log("A user connected");
 
   socket.on("disconnect", () => {
-    console.log("User disconnected")
-  })
-})
+    console.log("User disconnected");
+  });
+});
 
 // Routes
-app.use("/api/auth", authRoutes)
-app.use("/api/bookings", bookingRoutes)
-app.use("/api/admin", adminRoutes)
-app.use("/api/reviews", reviewRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send("Something broke!")
-})
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 // Start server
 httpServer.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+  console.log(`Server is running on port ${PORT}`);
+});
 
-export { io }
-
+export { io };
