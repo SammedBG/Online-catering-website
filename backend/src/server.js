@@ -6,7 +6,7 @@ import { createServer } from "http"
 import { Server } from "socket.io"
 import authRoutes from "./routes/auth.js"
 import bookingRoutes from "./routes/booking.js"
-import adminRoutes from "./routes/admin.js"
+import adminRoutes from "./routes/Admin.js"
 import reviewRoutes from "./routes/review.js"
 
 
