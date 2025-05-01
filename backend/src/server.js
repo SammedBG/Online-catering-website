@@ -14,15 +14,22 @@ dotenv.config();
 const app = express();
 const httpServer = createServer(app);
 
-// Allowed origins (without trailing slash)
-const allowedOrigins = [process.env.FRONTEND_URL]; 
+// Set allowed origin
+const allowedOrigins = [process.env.FRONTEND_URL];
 
 // Socket.IO CORS Configuration
 const io = new Server(httpServer, {
   cors: {
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      // Allow all requests with no origin (like Postman or other non-browser clients)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,  // Allow credentials if required
+    credentials: true,
   },
 });
 
@@ -32,7 +39,6 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests from the allowed origin
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
