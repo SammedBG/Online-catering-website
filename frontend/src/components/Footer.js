@@ -49,7 +49,7 @@ const Footer = () => {
           <div className="icons-f">
             <a href="https://wa.me/9739676924 "><i class="fa-brands fa-whatsapp "></i></a>
             <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.instagram.com/sachin_caterers_halaga"><i class="fa-brands fa-instagram"></i></a>
             <a href="/"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </div>
