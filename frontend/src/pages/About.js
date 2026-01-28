@@ -1,6 +1,5 @@
 import React,{ useEffect, useState } from 'react';
 import '../styles/About.css';
-import axios from 'axios';
 import { getReviews } from "../services/api";
 import { Link } from 'react-router-dom';
 import NewButton from '../components/NewButton';
@@ -37,7 +36,7 @@ const About = () => {
         <h1>❛❛Pure Veg Delights That Reach Beyond the Event❜❜</h1>
         <p>Our catering service is dedicated to creating memorable dining experiences with a wide range of delicious and wholesome pure vegetarian dishes. We take pride in serving fresh, high-quality meals crafted with love and care for every occasion from weddings and parties to corporate events and religious gatherings.
         </p>
-        <p>But our commitment doesn't stop there. We believe food is a gift that should never go to waste. That's why we go the extra mile by distributing leftover food to those in need, spreading joy and nourishment beyond the event itself. This thoughtful gesture allows your celebration to create a lasting, positive impact in the community.</p>
+        <p>But our commitment doesn't stop there. We believe food is a gift that should never go to waste. That's why we go the extra mile by distributing leftover food to those in need, spreading joy and nourishment beyond the event itself. This thoughtful gesture allows your celebration to create a lasting, positive impact in the community.</p>
       </div>
      </div>
       <div className="section-2">
@@ -50,7 +49,7 @@ const About = () => {
           <h2 >Indulge in a
             celebration with great
             food!</h2>
-          <h4>Mahaveer Catering Service, established in 2015, is dedicated to creating memorable dining experiences with nearly two decades of expertise. We specialize in crafting delicious, high-quality meals using fresh ingredients, and pay close attention to detail  from presentation to hygiene standards. Whether it’s a wedding, corporate event, or family gathering, our team ensures every event is thoughtfully planned and perfectly executed, leaving a lasting impression on your guests. Let Mahaveer Catering bring your vision to life and make your occasion truly special.</h4>
+          <h4>Mahaveer Catering Service, established in 2015, is dedicated to creating memorable dining experiences with nearly two decades of expertise. We specialize in crafting delicious, high-quality meals using fresh ingredients, and pay close attention to detail  from presentation to hygiene standards. Whether it's a wedding, corporate event, or family gathering, our team ensures every event is thoughtfully planned and perfectly executed, leaving a lasting impression on your guests. Let Mahaveer Catering bring your vision to life and make your occasion truly special.</h4>
           <Link to="/booking" className="about-btn"><NewButton text="Book Now" /></Link>
         </div>
       </div>
@@ -76,4 +75,3 @@ const About = () => {
 };
 
 export default About;
-
