@@ -31,9 +31,10 @@ const Header = () => {
           {user ? (
             <>
               <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
-              {user.role === 'admin' && (
+              {/* Admin link hidden from nav, check routes or enable via hidden shortcut if needed */}
+              {/* {user.role === 'admin' && (
                 <li><Link to="/admin" onClick={toggleMenu}>Admin Dashboard</Link></li>
-              )}
+              )} */}
               <li>
                 <button className='log-out' onClick={() => { logout(); toggleMenu(); }}>logout</button>
               </li>
