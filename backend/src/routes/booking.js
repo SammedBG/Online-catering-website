@@ -50,6 +50,31 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Cancel booking (user only)
+router.put("/:id/cancel", auth, async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ _id: req.params.id, user: req.user.id });
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    if (booking.status !== "pending") {
+      return res.status(400).json({ message: "Only pending bookings can be cancelled" });
+    }
+
+    booking.status = "cancelled";
+    await booking.save();
+
+    getIO().emit("bookingUpdated", booking); // Notify admin
+
+    res.json(booking);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // Confirm booking via email link
 router.get("/confirm/:id", async (req, res) => {
   try {

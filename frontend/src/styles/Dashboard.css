@@ -87,3 +87,46 @@
   }
 }
 
+/* New Styles */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-confirmed {
+    background-color: #C6F6D5;
+    color: #276749;
+}
+
+.status-cancelled {
+    background-color: #FED7D7;
+    color: #9B2C2C;
+}
+
+.status-pending {
+    background-color: #FEEBC8;
+    color: #9C4221;
+}
+
+.cancel-btn {
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: #c53030;
+}
+
