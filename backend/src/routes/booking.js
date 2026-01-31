@@ -3,7 +3,7 @@ import Booking from "../models/booking.js";
 import User from "../models/User.js";
 import { auth } from "../middleware/auth.js";
 
-import { io } from "../server.js";
+import { getIO } from "../socket.js";
 import { sendOwnerBookingNotification, sendUserBookingConfirmation } from "../utils/emailService.js";
 
 const router = express.Router();
@@ -22,7 +22,7 @@ router.post("/", auth, async (req, res) => {
     });
     await newBooking.save();
 
-    io.emit("newBooking", newBooking);
+    getIO().emit("newBooking", newBooking);
 
     try {
       await sendOwnerBookingNotification(newBooking);
@@ -71,7 +71,7 @@ router.get("/confirm/:id", async (req, res) => {
       console.error("Failed to send user confirmation:", emailError);
     }
 
-    io.emit("bookingConfirmed", booking);
+    getIO().emit("bookingConfirmed", booking);
 
     // Redirect to frontend dashboard or success page
     res.redirect(`${process.env.FRONTEND_URL}/dashboard?status=confirmed`);
