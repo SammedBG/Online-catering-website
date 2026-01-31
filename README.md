@@ -1,181 +1,136 @@
-# Sachin's Catering Services
+# Shree Mahaveer Inchal Catering Services
 
-Sachin's Catering Services is a full-stack web application designed to manage catering services efficiently. It provides features for customers to book catering services, leave reviews, and for administrators to manage bookings and user data.
+A robust, full-stack MERN application designed to streamline catering service management. This platform enables users to explore menus, book events, and manage their profiles, while providing administrators with a powerful dashboard for real-time booking management.
 
-## Table of Contents
+## 🚀 Key Features
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-- [Scripts](#scripts)
-- [Environment Variables](#environment-variables)
-- [Technologies Used](#technologies-used)
-- [License](#license)
+### 👤 User Features
+- **Authentication**: Secure Login, Registration, and Password Reset flows (JWT-based).
+- **Booking System**: Easy-to-use interface to book catering for Weddings, Corporate events, etc.
+- **Responsive Design**: Fully optimized for Mobile, Tablet, and Desktop.
+- **Notifications**: Email confirmations for successful bookings.
+- **Pages**: Home, Menu, Services, Gallery, About Us, Contact.
+
+### 🛡️ Admin Features
+- **Dashboard**: Centralized view of all bookings.
+- **Real-Time Updates**: Instant notifications of new bookings using **Socket.IO** (no page refresh needed).
+- **Management**: Approve, Reject, or Update booking statuses.
+
+### ⚙️ Technical Highlights
+- **Performance**: 
+  - **React Lazy Loading** & Suspense for fast initial load times.
+  - **Gzip Compression** on the backend for reduced data transfer.
+- **Security**: 
+  - **Helmet** for secure HTTP headers.
+  - **MongoSanitize** to prevent NoSQL injection.
+  - **HPP** (HTTP Parameter Pollution) protection.
+  - **CORS** configuration for secure cross-origin requests.
 
 ---
 
-## Features
-
-### Backend
-- RESTful API built with Express.js.
-- User authentication and authorization using JSON Web Tokens (JWT).
-- Role-based access control for admin and user functionalities.
-- MongoDB database integration using Mongoose.
-- Email notifications for booking confirmations.
-- Secure password hashing with bcrypt.
+## 🛠️ Technology Stack
 
 ### Frontend
-- React-based single-page application.
-- Responsive design for mobile and desktop users.
-- Dynamic booking and review management.
-- Integration with backend APIs for real-time data updates.
-- User-friendly interface for both customers and administrators.
+- **Framework**: React 19
+- **Routing**: React Router DOM v7
+- **Styling**: Vanilla CSS / Custom Styles
+- **State Management**: React Context API
+- **HTTP Client**: Axios
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database**: MongoDB (Mongoose ODM)
+- **Real-Time**: Socket.IO
+- **Email**: Nodemailer
 
 ---
 
-## Project Structure
+## 🔧 Environment Variables
 
+To run this project, you will need to add the following environment variables to your `.env` files.
+
+### Backend (`/backend/.env`)
+```env
+PORT=5000
+FRONTEND_URL=http://localhost:3000
+MONGODB_URI=your_mongodb_connection_string
+JWT_ACCESS_SECRET=your_access_secret
+JWT_REFRESH_SECRET=your_refresh_secret
+
+# Email Configuration (Gmail Example)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+EMAIL_SECURE=true
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_specific_password
+EMAIL_FROM=your_email@gmail.com
+OWNER_EMAIL=owner_email@gmail.com
 ```
+
+### Frontend (`/frontend/.env`)
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to set up the project locally.
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd Sachin`s-Catering-Services
+```
+
+### 2. Backend Setup
+```bash
+cd backend
+npm install
+# Ensure you create the .env file as shown above
+npm start
+```
+*The server will start on port 5000.*
+
+### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm start
+```
+*The application will open on http://localhost:3000.*
+
+---
+
+## 📦 Project Structure
+
+```bash
 Sachin`s-Catering-Services/
 ├── backend/
-│   ├── .env
-│   ├── package.json
 │   ├── src/
-│   │   ├── server.js
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   └── utils/
+│   │   ├── config/         # DB & Environment config
+│   │   ├── controllers/    # Route logic
+│   │   ├── middleware/     # Auth, Security, Error handling
+│   │   ├── models/         # Mongoose Schemas (User, Booking, etc.)
+│   │   ├── routes/         # API Routes
+│   │   ├── utils/          # Email service, Helpers
+│   │   ├── server.js       # Express App Entry Point
+│   │   └── socket.js       # Socket.IO Socket Manager
+│   └── package.json
+│
 ├── frontend/
-│   ├── .env
-│   ├── package.json
-│   ├── public/
-│   └── src/
-│       ├── App.js
-│       ├── components/
-│       ├── context/
-│       ├── pages/
-│       ├── services/
-│       ├── styles/
-│       └── utils/
+│   ├── src/
+│   │   ├── assets/         # Images, Fonts
+│   │   ├── components/     # Reusable Components (Header, Footer)
+│   │   ├── context/        # Auth Context
+│   │   ├── pages/          # Page Views (Home, Login, Dashboard)
+│   │   ├── services/       # API Calls (Axios)
+│   │   └── App.js          # Main Component with Lazy Loading
+│   └── package.json
 └── README.md
 ```
 
----
-
-## Getting Started
-
-### Backend Setup
-
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file in the `backend` directory and configure the required environment variables (see [Environment Variables](#environment-variables)).
-
-4. Start the backend server:
-   ```bash
-   npm start
-   ```
-   The backend server runs on `http://localhost:5000` by default.
-
-5. For development mode with hot-reloading, use:
-   ```bash
-   npm run dev
-   ```
-
----
-
-### Frontend Setup
-
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file in the `frontend` directory and configure the required environment variables (see [Environment Variables](#environment-variables)).
-
-4. Start the frontend development server:
-   ```bash
-   npm start
-   ```
-   The frontend application runs on `http://localhost:3000` by default.
-
----
-
-## Scripts
-
-### Backend
-
-- `npm start`: Starts the backend server.
-- `npm run dev`: Starts the backend server in development mode with hot-reloading (requires `nodemon`).
-
-### Frontend
-
-- `npm start`: Starts the React development server.
-- `npm run build`: Builds the React application for production.
-- `npm test`: Runs tests for the React application.
-
----
-
-## Environment Variables
-
-### Backend
-
-Create a `.env` file in the `backend` directory with the following variables:
-
-```
-PORT=5000
-DATABASE_URL=<your-mongodb-connection-string>
-JWT_ACCESS_SECRET=<your-jwt-access-secret>
-JWT_REFRESH_SECRET=<your-jwt-refresh-secret>
-EMAIL_USER=<your-email-address>
-EMAIL_PASS=<your-email-password>
-```
-
-### Frontend
-
-Create a `.env` file in the `frontend` directory with the following variable:
-
-```
-REACT_APP_API_URL=http://localhost:5000
-```
-
----
-
-## Technologies Used
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB with Mongoose
-- JSON Web Tokens (JWT)
-- Nodemailer
-- bcrypt for password hashing
-- dotenv for environment variable management
-
-### Frontend
-- React
-- Context API for state management
-- CSS for styling
-- Axios for API requests
-
----
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
+## 📄 License
+This project is licensed under the ISC License.
