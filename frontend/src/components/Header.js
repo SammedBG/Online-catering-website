@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="container nav-menu">
-        <Link to="/" className="logo"><img src="images/logo1.png" alt="logo" /></Link>
+        <Link to="/" className="logo"><img src="/images/logo1.png" alt="logo" /></Link>
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
         </button>

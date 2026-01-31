@@ -39,8 +39,8 @@ export const sendPasswordResetEmail = async (email, token) => {
 
 export const sendOwnerBookingNotification = async (booking) => {
   try {
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:3000';
-    const confirmUrl = `${backendUrl}/confirm-booking/${booking._id}`;
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+    const confirmUrl = `${backendUrl}/api/bookings/confirm/${booking._id}`;
     console.log('Confirmation URL:', confirmUrl);
 
     await transporter.sendMail({
