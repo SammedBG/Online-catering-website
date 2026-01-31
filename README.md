@@ -4,6 +4,7 @@ A robust, full-stack MERN application designed to streamline catering service ma
 
 ## 🚀 Key Features
 
+
 ### 👤 User Features
 - **Authentication**: Secure Login, Registration, and Password Reset flows (JWT-based).
 - **Booking System**: Easy-to-use interface to book catering for Weddings, Corporate events, etc.
