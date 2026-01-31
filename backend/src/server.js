@@ -14,8 +14,10 @@ import bookingRoutes from "./routes/booking.js"
 import adminRoutes from "./routes/admin.js"
 import reviewRoutes from "./routes/review.js"
 
+dotenv.config();
 
-dotenv.config()
+const app = express();
+const httpServer = createServer(app);
 
 const app = express()
 const httpServer = createServer(app)
@@ -23,7 +25,7 @@ const httpServer = createServer(app)
 // Initialize Socket.IO
 initSocket(httpServer)
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(helmet()) // Security headers
@@ -42,19 +44,19 @@ app.use(express.json())
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
-app.use("/api/auth", authRoutes)
-app.use("/api/bookings", bookingRoutes)
-app.use("/api/admin", adminRoutes)
-app.use("/api/reviews", reviewRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send("Something broke!")
-})
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 // Start server
 httpServer.listen(PORT, () => {
