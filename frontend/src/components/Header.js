@@ -39,7 +39,7 @@ const Header = () => {
               </li>
             </>
           ) : (
-            <li><Link to="/login" onClick={toggleMenu}><i className="fa-duotone fa-solid fa-right-to-bracket"></i></Link></li>
+            <li><Link to="/login" onClick={toggleMenu}><i className="fa-solid fa-right-to-bracket"></i></Link></li>
           )}
         </ul>
       </nav>

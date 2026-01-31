@@ -16,8 +16,6 @@ import reviewRoutes from "./routes/review.js"
 
 dotenv.config();
 
-const app = express();
-const httpServer = createServer(app);
 
 const app = express()
 const httpServer = createServer(app)
