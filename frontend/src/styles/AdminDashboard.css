@@ -7,36 +7,192 @@
 }
 
 .admin-dashboard h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #1a202c;
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 3px solid #e2e8f0;
 }
 
-.admin-dashboard h2 {
-  font-size: 1.75rem;
-  color: #4a5568;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Error Message */
-.error-message {
-  background-color: #fff5f5;
-  border-left: 4px solid #f56565;
-  color: #c53030;
-  padding: 1rem;
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-card h3 {
+  font-size: 0.875rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
+}
+
+.stat-card.pending .stat-number {
+  color: #d69e2e;
+}
+
+.stat-card.confirmed .stat-number {
+  color: #38a169;
+}
+
+.stat-card.guests .stat-number {
+  color: #3182ce;
+}
+
+/* Toolbar */
+.dashboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
-  border-radius: 4px;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/* Table Card Container */
+.search-box input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 300px;
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.view-btn,
+.export-btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #4a5568;
+  transition: all 0.2s;
+}
+
+.view-btn.active {
+  background: #edf2f7;
+  color: #2d3748;
+  border-color: #cbd5e0;
+}
+
+.export-btn {
+  background: #2d3748;
+  color: white;
+  border: none;
+}
+
+.export-btn:hover {
+  background: #1a202c;
+}
+
+/* Calendar View */
+.calendar-view {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  font-family: inherit;
+}
+
+.calendar-dot-container {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.calendar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.calendar-dot.pending {
+  background-color: #d69e2e;
+}
+
+.calendar-dot.confirmed {
+  background-color: #38a169;
+}
+
+.calendar-dot.cancelled {
+  background-color: #e53e3e;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #edf2f7;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.pending {
+  background-color: #d69e2e;
+}
+
+.dot.confirmed {
+  background-color: #38a169;
+}
+
+.dot.cancelled {
+  background-color: #e53e3e;
+}
+
+/* Existing Table Styles */
 .table-responsive {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
   overflow-x: auto;
 }
@@ -49,7 +205,7 @@
 
 .bookings-table th,
 .bookings-table td {
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid #edf2f7;
 }
@@ -60,101 +216,52 @@
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
-.bookings-table tr {
-  transition: background-color 0.2s ease;
-}
-
-.bookings-table tr:hover {
-  background-color: #f8fafc;
-}
-
-.bookings-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* Select Dropdown */
 .bookings-table select {
-  padding: 0.5rem 2rem 0.5rem 1rem;
+  padding: 0.4rem;
   border-radius: 6px;
   border: 1px solid #e2e8f0;
-  background-color: white;
-  color: #4a5568;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: border-color 0.2s;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234A5568'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 1rem;
 }
 
-.bookings-table select:hover,
-.bookings-table select:focus {
-  border-color: #a0aec0;
-  outline: none;
-}
-
-/* Status Badges */
 .status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 4px 8px;
+  border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: inline-block;
-  min-width: 80px;
-  text-align: center;
 }
 
 .status-confirmed {
   background-color: #c6f6d5;
   color: #22543d;
-  border: 1px solid #9ae6b4;
 }
 
 .status-cancelled {
   background-color: #fed7d7;
   color: #822727;
-  border: 1px solid #feb2b2;
 }
 
 .status-pending {
   background-color: #feebc8;
   color: #744210;
-  border: 1px solid #fbd38d;
 }
 
-/* Loading/Empty State */
-.admin-dashboard.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 1.5rem;
-  color: #4a5568;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .admin-dashboard {
-    padding: 1.5rem;
-  }
-
-  .admin-dashboard h1 {
-    font-size: 1.75rem;
-  }
-
-  .bookings-table th,
-  .bookings-table td {
     padding: 1rem;
-    font-size: 0.875rem;
+  }
+
+  .dashboard-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .actions {
+    overflow-x: auto;
   }
 }
