@@ -2,8 +2,8 @@ import express from "express";
 import Booking from "../models/booking.js";
 import User from "../models/User.js";
 import { auth } from "../middleware/auth.js";
-import { isAdmin } from "../middleware/isAdmin.js"; // Adjust path if needed
-import { io } from "../server.js";
+
+import { getIO } from "../socket.js";
 import { sendOwnerBookingNotification, sendUserBookingConfirmation } from "../utils/emailService.js";
 
 const router = express.Router();
@@ -22,7 +22,7 @@ router.post("/", auth, async (req, res) => {
     });
     await newBooking.save();
 
-    io.emit("newBooking", newBooking);
+    getIO().emit("newBooking", newBooking);
 
     try {
       await sendOwnerBookingNotification(newBooking);
@@ -50,31 +50,17 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// Get all bookings (admin only)
-router.get("/admin/bookings", auth, isAdmin, async (req, res) => {
+// Confirm booking via email link
+router.get("/confirm/:id", async (req, res) => {
   try {
-    const bookings = await Booking.find()
-      .populate("user", "name email")
-      .sort({ date: 1 });
-    res.json(bookings);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-// Update booking status (admin only)
-router.put("/admin/bookings/:id", auth, isAdmin, async (req, res) => {
-  try {
-    const { status } = req.body;
     const booking = await Booking.findByIdAndUpdate(
       req.params.id,
-      { status },
+      { status: "confirmed" },
       { new: true }
     );
 
     if (!booking) {
-      return res.status(404).json({ message: "Booking not found" });
+      return res.status(404).send("Booking not found");
     }
 
     const user = await User.findById(booking.user);
@@ -85,12 +71,13 @@ router.put("/admin/bookings/:id", auth, isAdmin, async (req, res) => {
       console.error("Failed to send user confirmation:", emailError);
     }
 
-    io.emit("bookingConfirmed", booking);
+    getIO().emit("bookingConfirmed", booking);
 
-    res.json(booking);
+    // Redirect to frontend dashboard or success page
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard?status=confirmed`);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).send("Server error");
   }
 });
 
