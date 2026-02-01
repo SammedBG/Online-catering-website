@@ -31,15 +31,16 @@ const Header = () => {
           {user ? (
             <>
               <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
-              {user.role === 'admin' && (
+              {/* Admin link hidden from nav, check routes or enable via hidden shortcut if needed */}
+              {/* {user.role === 'admin' && (
                 <li><Link to="/admin" onClick={toggleMenu}>Admin Dashboard</Link></li>
-              )}
+              )} */}
               <li>
                 <button className='log-out' onClick={() => { logout(); toggleMenu(); }}>logout</button>
               </li>
             </>
           ) : (
-            <li><Link to="/login" onClick={toggleMenu}><i className="fa-duotone fa-solid fa-right-to-bracket"></i></Link></li>
+            <li><Link to="/login" onClick={toggleMenu}><i className="fa-solid fa-right-to-bracket"></i></Link></li>
           )}
         </ul>
       </nav>
