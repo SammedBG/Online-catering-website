@@ -11,13 +11,17 @@ const router = express.Router();
 // Create a new booking
 router.post("/", auth, async (req, res) => {
   try {
-    const { eventType, date, time, guests, additionalInfo } = req.body;
+    const { eventType, date, time, guests, venue, foodType, serviceType, contactPhone, additionalInfo } = req.body;
     const newBooking = new Booking({
       user: req.user.id,
       eventType,
       date,
       time,
       guests,
+      venue,
+      foodType,
+      serviceType,
+      contactPhone,
       additionalInfo,
     });
     await newBooking.save();

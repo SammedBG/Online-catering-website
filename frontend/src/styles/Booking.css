@@ -227,8 +227,13 @@
 
 .date-time-row {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
+}
+
+.side-inputs {
+  display: flex;
+  flex-direction: column;
 }
 
 .selected-date-hint {
