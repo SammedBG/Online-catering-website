@@ -199,9 +199,10 @@
     padding: 1.5rem;
   }
 
-  .form-row {
+  .form-row,
+  .date-time-row {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 1rem;
   }
 
   .event-type-grid {
@@ -213,4 +214,26 @@
   .event-type-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Calendar Specifics */
+.booking-calendar {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.date-time-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.selected-date-hint {
+  margin-top: 0.5rem;
+  color: #38a169;
+  font-weight: 600;
+  font-size: 0.9rem;
 }

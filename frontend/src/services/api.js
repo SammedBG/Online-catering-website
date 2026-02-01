@@ -79,4 +79,9 @@ export const updateBookingStatus = (bookingId, status) =>
 export const getReviews = () => api.get("/reviews");
 export const createReview = (reviewData) => api.post("/reviews", reviewData);
 
+// Availability API calls
+export const getUnavailableDates = () => api.get("/availability");
+export const blockDate = (date, reason) => api.post("/availability/block", { date, reason });
+export const unblockDate = (date) => api.delete(`/availability/unblock/${date}`);
+
 export default api;

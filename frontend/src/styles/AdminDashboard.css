@@ -188,6 +188,22 @@
   background-color: #e53e3e;
 }
 
+.dot.blocked {
+  background-color: #718096;
+}
+
+.calendar-tile-blocked {
+  background-color: #cbd5e0 !important;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.calendar-hint {
+  color: #718096;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
 /* Existing Table Styles */
 .table-responsive {
   background: white;

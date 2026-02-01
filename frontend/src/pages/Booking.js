@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { createBooking } from "../services/api";
+import React, { useState, useEffect } from "react";
+import { createBooking, getUnavailableDates } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import "../styles/Booking.css";
 
 const eventTypes = [
@@ -22,9 +24,22 @@ const Booking = () => {
     guests: "",
     additionalInfo: "",
   });
+  const [blockedDates, setBlockedDates] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchDates = async () => {
+        try {
+            const res = await getUnavailableDates();
+            setBlockedDates(res.data.blockedDates);
+        } catch (e) {
+            console.error("Failed to fetch dates", e);
+        }
+    };
+    fetchDates();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,10 +50,23 @@ const Booking = () => {
     setNewBooking((prev) => ({ ...prev, eventType: type }));
   };
 
+  const handleDateChange = (date) => {
+      // Offset for timezone issues, or just use YYYY-MM-DD string
+      // Simplified: create a date object in local time and grab YYYY-MM-DD
+      const offset = date.getTimezoneOffset();
+      const localDate = new Date(date.getTime() - (offset*60*1000));
+      const dateString = localDate.toISOString().split('T')[0];
+      setNewBooking((prev) => ({ ...prev, date: dateString }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newBooking.eventType) {
         setError("Please select an event type.");
+        return;
+    }
+    if (!newBooking.date) {
+        setError("Please select a date.");
         return;
     }
     
@@ -60,10 +88,21 @@ const Booking = () => {
       setTimeout(() => navigate('/dashboard'), 2000);
     } catch (error) {
       console.error("Error submitting booking:", error);
-      setError("Failed to submit booking. Please try again.");
+      setError("Failed to submit booking. " + (error.response?.data?.message || "Please try again."));
     } finally {
         setLoading(false);
     }
+  };
+
+  const tileDisabled = ({ date, view }) => {
+      if (view === 'month') {
+          // Disable past dates
+          if (date < new Date(new Date().setHours(0,0,0,0))) return true;
+
+          // Disable blocked dates
+          return blockedDates.some(bg => new Date(bg.date).toDateString() === date.toDateString());
+      }
+      return false;
   };
 
   return (
@@ -99,19 +138,19 @@ const Booking = () => {
             {/* Section 2: Date & Time */}
             <div className="form-section">
                 <label className="section-label">2. When becomes the memory?</label>
-                <div className="form-row">
-                    <div className="input-group">
-                        <label>Date</label>
-                        <input 
-                            type="date" 
-                            name="date" 
-                            value={newBooking.date} 
-                            onChange={handleInputChange} 
-                            required 
-                            min={new Date().toISOString().split('T')[0]}
+                <div className="form-row date-time-row">
+                    <div className="input-group calendar-group">
+                        <label>Select Date</label>
+                        <Calendar
+                            onChange={handleDateChange}
+                            value={newBooking.date ? new Date(newBooking.date) : null}
+                            tileDisabled={tileDisabled}
+                            minDate={new Date()}
+                            className="booking-calendar"
                         />
+                        {newBooking.date && <p className="selected-date-hint">Selected: {new Date(newBooking.date).toLocaleDateString()}</p>}
                     </div>
-                    <div className="input-group">
+                    <div className="input-group time-group">
                         <label>Time</label>
                         <input 
                             type="time" 

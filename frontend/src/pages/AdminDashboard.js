@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { getAdminBookings, updateBookingStatus } from "../services/api";
+import { getAdminBookings, updateBookingStatus, getUnavailableDates, blockDate, unblockDate } from "../services/api";
 import io from "socket.io-client";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -7,12 +7,13 @@ import "../styles/AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState([]);
+  const [blockedDates, setBlockedDates] = useState([]);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'calendar'
 
   useEffect(() => {
-    fetchBookings();
+    fetchData();
 
     const socket = io(process.env.REACT_APP_API_URL || "http://localhost:5000");
 
@@ -33,13 +34,17 @@ const AdminDashboard = () => {
     }
   }, []);
 
-  const fetchBookings = async () => {
+  const fetchData = async () => {
     try {
-      const response = await getAdminBookings();
-      setBookings(response.data);
+      const [bookingsRes, availabilityRes] = await Promise.all([
+          getAdminBookings(),
+          getUnavailableDates()
+      ]);
+      setBookings(bookingsRes.data);
+      setBlockedDates(availabilityRes.data.blockedDates);
     } catch (error) {
-      console.error("Error fetching bookings:", error.response?.data || error.message);
-      setError("Failed to fetch bookings");
+      console.error("Error fetching data:", error);
+      setError("Failed to fetch dashboard data");
     }
   };
 
@@ -50,6 +55,37 @@ const AdminDashboard = () => {
     } catch (error) {
       setError("Failed to update status");
     }
+  };
+
+  const handleDateClick = async (date) => {
+      // Check if blocked
+      const dateStr = date.toDateString();
+      const isBlocked = blockedDates.some(d => new Date(d.date).toDateString() === dateStr);
+      
+      if (isBlocked) {
+        if(window.confirm(`Unblock ${date.toLocaleDateString()}?`)) {
+             try {
+                 // We need to pass the ISO Date that was stored, or just the date object.
+                 // The backend matches by date. Ideally convert to ISO string at midnight UTC or handle timezones carefully.
+                 // For now, let's just find the exact ISO string from our state if possible or rely on date param.
+                 const exactDate = blockedDates.find(d => new Date(d.date).toDateString() === dateStr).date;
+                 await unblockDate(exactDate);
+                 setBlockedDates(prev => prev.filter(d => new Date(d.date).toDateString() !== dateStr));
+             } catch (e) {
+                 alert("Failed to unblock date");
+             }
+        }
+      } else {
+        const reason = prompt(`Block ${date.toLocaleDateString()}? Enter reason (e.g. Fully Booked, Holiday):`);
+        if (reason) {
+            try {
+                const res = await blockDate(date, reason);
+                setBlockedDates(prev => [...prev, res.data]);
+            } catch (e) {
+                alert("Failed to block date: " + (e.response?.data?.message || e.message));
+            }
+        }
+      }
   };
 
   const downloadCSV = () => {
@@ -88,6 +124,14 @@ const AdminDashboard = () => {
         case 'cancelled': return 'status-cancelled';
         default: return 'status-pending';
     }
+  };
+
+  const tileClassName = ({ date, view }) => {
+      if (view === 'month') {
+          if (blockedDates.some(d => new Date(d.date).toDateString() === date.toDateString())) {
+              return 'calendar-tile-blocked';
+          }
+      }
   };
 
   const tileContent = ({ date, view }) => {
@@ -147,7 +191,7 @@ const AdminDashboard = () => {
                   className={`view-btn ${viewMode === 'calendar' ? 'active' : ''}`}
                   onClick={() => setViewMode('calendar')}
               >
-                  Calendar
+                  Availability Calendar
               </button>
               <button className="export-btn" onClick={downloadCSV}>
                   Export CSV
@@ -199,14 +243,18 @@ const AdminDashboard = () => {
         </div>
       ) : (
           <div className="calendar-view">
+              <h2>Availability Management</h2>
+              <p className="calendar-hint">Click a date to Block/Unblock it.</p>
               <Calendar 
                   tileContent={tileContent}
+                  tileClassName={tileClassName}
+                  onClickDay={handleDateClick}
                   value={new Date()}
               />
               <div className="calendar-legend">
-                  <div className="legend-item"><span className="dot pending"></span> Pending</div>
-                  <div className="legend-item"><span className="dot confirmed"></span> Confirmed</div>
-                  <div className="legend-item"><span className="dot cancelled"></span> Cancelled</div>
+                  <div className="legend-item"><span className="dot pending"></span> Pending Booking</div>
+                  <div className="legend-item"><span className="dot confirmed"></span> Confirmed Booking</div>
+                  <div className="legend-item"><span className="dot blocked"></span> Blocked/Holidays</div>
               </div>
           </div>
       )}
