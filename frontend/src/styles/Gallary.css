@@ -23,13 +23,18 @@
 @media (max-width: 768px) {
     .sub-div {
         flex-direction: column;
-        justify-content: none;
+        align-items: center;
+        /* Center images vertically */
     }
 
     .image-gallary img {
-        height: 40vh;
-        width: 300px;
-        margin: 20px 55px;
-
+        height: auto;
+        /* Allow aspect ratio scaling */
+        width: 90%;
+        /* Responsive width */
+        max-width: 350px;
+        /* Cap width */
+        margin: 20px 0;
+        /* Vertical spacing only */
     }
 }
