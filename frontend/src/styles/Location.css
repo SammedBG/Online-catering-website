@@ -149,22 +149,41 @@
     font-size: 2rem;
   }
 
+  .location-main {
+    height: auto;
+    /* Allow auto height for mobile */
+    padding: 2rem 1rem;
+    margin-top: 50px;
+  }
+
   .location-info h2,
   .location-map h2 {
     font-size: 1.5rem;
   }
-  .location-content{
+
+  .location-content {
     display: flex;
     flex-direction: column;
   }
+
   .location-info {
     width: 100%;
+    margin: 20px 0;
+    /* Adjust margin */
   }
+
   .location-map {
     width: 100%;
   }
-  .map-container{
-    padding: 50%;
+
+  .map-container {
+    padding-bottom: 75%;
+    /* Taller map for mobile */
   }
-  
+
+  .contact-section .h2-info {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
 }
