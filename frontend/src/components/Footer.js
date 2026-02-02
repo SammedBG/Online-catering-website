@@ -15,8 +15,20 @@ const Footer = () => {
           <span>Retirement</span>•
           <span>Wedding</span>•
           <span>Anniversary</span>•
-          <span>Engagement</span>•
-          <span>Birthday</span>•
+          <span>Engagement</span>
+        </div>
+        <div className="marquee-content">
+          •<span>Birthday</span>•
+          <span>House warming</span>•
+          <span>Mehndi</span>•
+          <span>Corporate</span>•
+          <span>Retirement</span>•
+          <span>Wedding</span>•
+          <span>Anniversary</span>•
+          <span>Engagement</span>
+        </div>
+        <div className="marquee-content">
+          •<span>Birthday</span>•
           <span>House warming</span>•
           <span>Mehndi</span>•
           <span>Corporate</span>•

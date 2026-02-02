@@ -491,37 +491,33 @@
     /* Stack icons */
     height: auto;
     padding: 20px;
-    margin-bottom: 3rem;
-    /* Fixed: Reduced from 50vh to 3rem */
+    margin-bottom: 50vh;
   }
 
   .icon-text {
-    width: 90%;
+    width: 80%;
     /* Increase width */
-    margin: 15px 0;
+    margin: 10px 0;
   }
 
   .icon-text img {
-    width: 70px;
+    width: 80px;
     /* Reduce image size */
-    height: 70px;
+    height: 80px;
   }
 
   .home-section-3 {
-    margin-top: 3rem;
+    margin-top: 50px;
     /* Reduce margin */
   }
 
   .home-content {
-    margin-top: 2rem;
-    /* Fixed: Reduced from 50vh */
+    margin-top: 50vh;
   }
 
   .home-section-3 .home-section-h2 {
-    font-size: 32px;
+    font-size: 40px;
     /* Reduce font size */
-    line-height: 1.2;
-    padding: 0 1rem;
   }
 
   .section-card-block {
@@ -530,12 +526,11 @@
   }
 
   .section-card-3 {
-    width: 95%;
+    width: 90%;
     /* Increase width */
     height: auto;
-    /* Fixed: Removed 110vh */
-    min-height: auto;
-    margin: 15px 0;
+    /* Adjust height */
+    margin: 10px 0;
     padding: 20px;
     /* Reduce padding */
   }
@@ -546,7 +541,7 @@
   }
 
   .btn-home {
-    margin: 30px 0;
+    margin: 20px 0;
     /* Reduce margin */
   }
 
