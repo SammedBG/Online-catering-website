@@ -42,7 +42,7 @@ function Menu() {
       <div className="menu-section-2">
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter1} alt="menu-image" />
+            <img src={starter1} alt="Starter dishes: Finger chips, Pakoda, Chat" />
           </div>
           <div className="menu-content">
             <h2>STARTER</h2>
@@ -62,7 +62,7 @@ function Menu() {
         </div>
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter2} alt="menu-image" />
+            <img src={starter2} alt="Roti and flatbreads: Chapati, Paratha, Naan" />
           </div>
           <div className="menu-content">
             <h2>ROTI</h2>
@@ -84,7 +84,7 @@ function Menu() {
       <div className="menu-section-2">
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter4} alt="menu-image" />
+            <img src={starter4} alt="Dal and Pulses: Fry, Tadka, Makni" />
           </div>
           <div className="menu-content">
             <h2>DAL</h2>
@@ -104,7 +104,7 @@ function Menu() {
         </div>
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter5} alt="menu-image" />
+            <img src={starter5} alt="Special Vegeterian Curry Dishes" />
           </div>
           <div className="menu-content">
             <h2>SPECIAL VEG KHAJANA</h2>
@@ -126,7 +126,7 @@ function Menu() {
       <div className="menu-section-2">
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter6} alt="menu-image" />
+            <img src={starter6} alt="Raitha and Salad varieties" />
           </div>
           <div className="menu-content">
             <h2>RAITHA</h2>
@@ -146,7 +146,7 @@ function Menu() {
         </div>
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter7} alt="menu-image" />
+            <img src={starter7} alt="Various Chutneys" />
           </div>
           <div className="menu-content">
             <h2>CHUTNEY'S</h2>
@@ -168,7 +168,7 @@ function Menu() {
       <div className="menu-section-2">
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter9} alt="menu-image" />
+            <img src={starter9} alt="Chinese Starters: Manchurian, Noodles" />
           </div>
           <div className="menu-content">
             <h2>CHINESE STARTER</h2>
@@ -188,7 +188,7 @@ function Menu() {
         </div>
         <div className="menu-cards">
           <div className="menu-image">
-            <img src={starter3} alt="menu-image" />
+            <img src={starter3} alt="South Indian Delicacies: Idli, Dosa" />
           </div>
           <div className="menu-content">
             <h2>SOUTH INDIAN DISH</h2>
