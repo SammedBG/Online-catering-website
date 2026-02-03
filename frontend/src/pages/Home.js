@@ -48,19 +48,19 @@ const Home = () => {
           <div className="section-card-3">
             <img src={event1} alt="card-1" />
             <h4>Wedding Event</h4>
-            <div className="ul-list"><ul>
+            <p><ul>
                                 <li>We cater to 100 to 3000+ guests for a grand wedding.</li>
                                 <li>We ensure strict hygiene with fresh ingredients and sanitized kitchens.</li>
                                 <li>Our pure vegetarian menu includes Jain, Satvik, and custom options.</li>
                                 <li>We offer Indian, International cuisines, live counters, and desserts.</li>
                                 <li>Our trained staff provides seamless buffet, plated meals, and live cooking.</li>
                                 <li>Elegant food presentation and décor enhance the wedding ambiance.</li>
-                            </ul></div>
+                            </ul></p>
           </div>
           <div className="section-card-3">
             <img src={event3} alt="card-3" />
             <h4>Corporate Event</h4>
-            <div className="ul-list"><ul>
+            <p><ul>
                                 <li>We serve 50 to 2000+ guests, ensuring a seamless corporate event.</li>
 
                                 <li>Our custom menus suit meetings, seminars, and business gatherings.</li>
@@ -72,7 +72,7 @@ const Home = () => {
                                 <li>Our expert staff ensures fast, professional, and courteous service.</li>
 
                                 <li>Elegant presentation and decor enhance the corporate ambiance.</li>
-                            </ul></div>
+                            </ul></p>
           </div>
         </div>
         <div className="btn-home">

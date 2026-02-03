@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="container nav-menu">
-        <Link to="/" className="logo"><img src="/images/logo1.png" alt="logo" /></Link>
+        <Link to="/" className="logo"><img src="images/logo1.png" alt="logo" /></Link>
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
         </button>
@@ -40,7 +40,11 @@ const Header = () => {
               </li>
             </>
           ) : (
+<<<<<<< HEAD
             <li><Link to="/login" onClick={toggleMenu}><i className="fa-solid fa-right-to-bracket"></i></Link></li>
+=======
+            <li><Link to="/login" onClick={toggleMenu}><i class="fa-duotone fa-solid fa-right-to-bracket"></i></Link></li>
+>>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
           )}
         </ul>
       </nav>
