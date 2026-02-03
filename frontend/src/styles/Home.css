@@ -38,16 +38,13 @@
   font-family: "Lora:ital";
   font-size: 3rem;
 }
-
-.section-1 .h4-tag {
+.section-1 .h4-tag{
   font-size: 30px;
   margin-top: 40px;
 }
-
-.h4-tag {
+.h4-tag{
   animation: blink 3s infinite;
 }
-
 .section-2 {
 
   height: 100vh;
@@ -194,7 +191,7 @@
   margin-top: 350px;
 }
 
-.explore-1 .ex {
+.explore-1 .ex{
   margin: 10px;
   text-decoration: none;
   font-size: 15px;
@@ -202,7 +199,6 @@
   color: rgb(255, 255, 255);
   text-align: center;
 }
-
 .ex {
   display: inline-block;
   padding: 0.75rem 1.25rem;
@@ -216,7 +212,6 @@
   overflow: hidden;
   z-index: 1;
 }
-
 .ex:after {
   content: "";
   position: absolute;
@@ -227,9 +222,8 @@
   background-color: rgba(39, 80, 90, 0.947);
   border-radius: 10rem;
   z-index: -2;
-
+  
 }
-
 .ex:before {
   content: "";
   position: absolute;
@@ -241,14 +235,12 @@
   transition: all 0.3s;
   border-radius: 10rem;
   z-index: -1;
-
+  
 }
-
 .ex:hover {
   color: #0e0d0d;
   font-weight: 700;
 }
-
 .ex:hover:before {
   width: 100%;
 }
@@ -333,28 +325,25 @@
 }
 
 .home-section-3 {
-  margin-top: 100px;
+  margin-top:100px;
 }
 
-.home-section-3 h6 {
+.home-section-3 h6{
   font-size: 20px;
   color: #4A5568;
 }
-
-.section-card-3 h4 {
+.section-card-3 h4{
   font-size: 30px;
   color: #4A5568;
 }
-
-.section-card-3 p {
+.section-card-3 p{
   font-size: 16px;
   color: #000000;
 }
-
-.home-section-3 .home-section-h2 {
-  font-family: "Merriweather', serif";
-  font-size: 70px;
-  font-weight: 500;
+.home-section-3 .home-section-h2{
+font-family: "Merriweather', serif";
+font-size: 70px;
+font-weight: 500;
 }
 
 .section-card-block {
@@ -372,17 +361,15 @@
   border-radius: 20px;
   text-align: left;
   height: 110vh;
-  width: 50%;
+  width:50% ;
 }
-
-.section-card-3 img {
+.section-card-3 img{
   height: auto;
   width: 100%;
   border-radius: 20px;
   padding: 0px;
 }
-
-.btn-home {
+.btn-home{
   margin: 30px 0 150px 0;
   display: flex;
   justify-content: center;
@@ -391,42 +378,33 @@
 
 @media (max-width: 768px) {
   .home-section-main {
-    height: 70vh;
-    /* Reduce height */
+    height: 70vh; /* Reduce height */
     padding: 0.5rem;
   }
 
   .section-1 .hello {
-    font-size: 2rem;
-    /* Reduce font size */
+    font-size: 2rem; /* Reduce font size */
   }
 
   .section-1 .h4-tag {
-    font-size: 20px;
-    /* Reduce font size */
+    font-size: 20px; /* Reduce font size */
     margin-top: 20px;
   }
 
   .explore-1 {
-    margin-top: 150px;
-    /* Reduce margin */
-    flex-direction: column;
-    /* Stack buttons */
+    margin-top: 150px; /* Reduce margin */
+    flex-direction: column; /* Stack buttons */
   }
 
   .explore-1 .ex {
-    font-size: 12px;
-    /* Reduce font size */
-    padding: 0.5rem 1rem;
-    /* Reduce padding */
+    font-size: 12px; /* Reduce font size */
+    padding: 0.5rem 1rem; /* Reduce padding */
     margin: 5px;
   }
 
   .section-2 {
-    height: auto;
-    /* Allow height to adjust */
-    flex-direction: column;
-    /* Stack content */
+    height: auto; /* Allow height to adjust */
+    flex-direction: column; /* Stack content */
     padding: 20px;
   }
 
@@ -434,15 +412,12 @@
     width: 100%;
     margin-left: 0;
     margin-top: 20px;
-    flex-direction: column;
-    /* Stack images */
+    flex-direction: column; /* Stack images */
   }
 
   .image-home img {
-    width: 90%;
-    /* Increase width for mobile */
-    height: auto;
-    /* Maintain aspect ratio */
+    width: 90%; /* Increase width for mobile */
+    height: auto; /* Maintain aspect ratio */
     margin: 10px 0;
   }
 
@@ -455,110 +430,83 @@
   .home-section-1 h2,
   .home-section-1 h4 {
     margin-left: 0;
-    text-align: center;
-    /* Center-align text */
+    text-align: center; /* Center-align text */
   }
 
   .home-section-1 h2 {
-    font-size: 35px;
-    /* Reduce font size */
+    font-size: 35px; /* Reduce font size */
     line-height: 1.2;
   }
 
   .home-section-1 h4 {
-    font-size: 14px;
-    /* Reduce font size */
+    font-size: 14px; /* Reduce font size */
     margin-right: 0;
   }
 
   .about-btn {
-    width: 50%;
-    /* Wider button for easier tapping */
+    width: 50%; /* Wider button for easier tapping */
     margin: 20px auto;
   }
 
 
 
   .home-content .home-header {
-    font-size: 25px;
-    /* Reduce font size */
+    font-size: 25px; /* Reduce font size */
     padding: 0 20px;
     margin-top: 0;
   }
 
   .icon-p {
-    flex-direction: column;
-    /* Stack icons */
+    flex-direction: column; /* Stack icons */
     height: auto;
     padding: 20px;
-    margin-bottom: 3rem;
-    /* Fixed: Reduced from 50vh to 3rem */
+    margin-bottom: 50vh;
   }
 
   .icon-text {
-    width: 90%;
-    /* Increase width */
-    margin: 15px 0;
+    width: 80%; /* Increase width */
+    margin: 10px 0;
   }
 
   .icon-text img {
-    width: 70px;
-    /* Reduce image size */
-    height: 70px;
+    width: 80px; /* Reduce image size */
+    height: 80px;
   }
 
   .home-section-3 {
-    margin-top: 3rem;
-    /* Reduce margin */
+    margin-top: 50px; /* Reduce margin */
   }
-
-  .home-content {
-    margin-top: 2rem;
-    /* Fixed: Reduced from 50vh */
+  .home-content{
+    margin-top: 50vh;
   }
-
   .home-section-3 .home-section-h2 {
-    font-size: 32px;
-    /* Reduce font size */
-    line-height: 1.2;
-    padding: 0 1rem;
+    font-size: 40px; /* Reduce font size */
   }
 
   .section-card-block {
-    flex-direction: column;
-    /* Stack cards */
+    flex-direction: column; /* Stack cards */
   }
 
   .section-card-3 {
-    width: 95%;
-    /* Increase width */
-    height: auto;
-    /* Fixed: Removed 110vh */
-    min-height: auto;
-    margin: 15px 0;
-    padding: 20px;
-    /* Reduce padding */
+    width: 90%; /* Increase width */
+    height: auto; /* Adjust height */
+    margin: 10px 0;
+    padding: 20px; /* Reduce padding */
   }
 
   .section-card-3 h4 {
-    font-size: 24px;
-    /* Reduce font size */
+    font-size: 24px; /* Reduce font size */
   }
 
   .btn-home {
-    margin: 30px 0;
-    /* Reduce margin */
+    margin: 20px 0; /* Reduce margin */
   }
-
+   
 }
-
 @keyframes blink {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0;
   }

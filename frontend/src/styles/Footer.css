@@ -138,12 +138,11 @@
   .address {
     margin-top: 30px;
   }
-
   .container-footer {
     display: flex;
     flex-direction: column;
   }
-
+  
 }
 
 /* Marquee Banner - Add this if you want the scrolling banner from the image */
@@ -168,17 +167,10 @@
 
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
-}
-
-/* Ensure the parent container can handle the double width content for seamless looping */
-.marquee-content {
-  display: inline-flex;
-  min-width: 200%;
-  animation: marquee 20s linear infinite;
 }
