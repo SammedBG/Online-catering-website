@@ -1,10 +1,14 @@
 <<<<<<< HEAD
 import React, { Suspense, lazy } from "react"
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom"
 =======
 import React from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 >>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
+=======
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
@@ -21,7 +25,6 @@ import ResetPassword from "./pages/ResetPassword"
 import AdminDashboard from "./pages/AdminDashboard"
 import { AuthProvider } from "./context/AuthContext"
 import ScrollToTop from "./components/scrollToTop"
-import AdminLayout from "./components/AdminLayout"
 import "./styles/global.css"
 
 <<<<<<< HEAD
@@ -41,6 +44,7 @@ const AdminDashboard = lazy(() => import("./pages/AdminDashboard"))
 
 const Loading = () => <div className="loading">Loading...</div>
 
+<<<<<<< HEAD
 // Layout component for regular pages
 const MainLayout = () => (
   <div className="app">
@@ -54,12 +58,15 @@ const MainLayout = () => (
 
 =======
 >>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
+=======
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
 const App = () => {
   return (
     <AuthProvider>
       <Router>
 <<<<<<< HEAD
         <ScrollToTop />
+<<<<<<< HEAD
         <Suspense fallback={<Loading />}>
           <Routes>
             {/* Admin Routes with separate Layout */}
@@ -99,6 +106,30 @@ const App = () => {
           <Footer />
         </div>
 >>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
+=======
+        <div className="app">
+          <Header />
+          <main className="container">
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/gallary" element={<Gallary />} />
+                <Route path="/location" element={<Location />} />
+                <Route path="/booking" element={<Booking />} />
+                <Route path="/login" element={<LoginRegister />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/Services" element={<Services />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </div>
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
       </Router>
     </AuthProvider>
   )

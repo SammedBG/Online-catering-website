@@ -68,7 +68,6 @@ export const getCurrentUser = () => api.get("/auth/user");
 // Booking API calls
 export const createBooking = (bookingData) => api.post("/bookings", bookingData);
 export const getUserBookings = () => api.get("/bookings");
-export const cancelBooking = (bookingId) => api.put(`/bookings/${bookingId}/cancel`);
 
 // Admin API calls
 export const getAdminBookings = () => api.get("/admin/bookings");
@@ -78,10 +77,5 @@ export const updateBookingStatus = (bookingId, status) =>
 // Review API calls
 export const getReviews = () => api.get("/reviews");
 export const createReview = (reviewData) => api.post("/reviews", reviewData);
-
-// Availability API calls
-export const getUnavailableDates = () => api.get("/availability");
-export const blockDate = (date, reason) => api.post("/availability/block", { date, reason });
-export const unblockDate = (date) => api.delete(`/availability/unblock/${date}`);
 
 export default api;

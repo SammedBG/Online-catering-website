@@ -31,20 +31,23 @@ const Header = () => {
           {user ? (
             <>
               <li><Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link></li>
-              {/* Admin link hidden from nav, check routes or enable via hidden shortcut if needed */}
-              {/* {user.role === 'admin' && (
+              {user.role === 'admin' && (
                 <li><Link to="/admin" onClick={toggleMenu}>Admin Dashboard</Link></li>
-              )} */}
+              )}
               <li>
                 <button className='log-out' onClick={() => { logout(); toggleMenu(); }}>logout</button>
               </li>
             </>
           ) : (
 <<<<<<< HEAD
+<<<<<<< HEAD
             <li><Link to="/login" onClick={toggleMenu}><i className="fa-solid fa-right-to-bracket"></i></Link></li>
 =======
             <li><Link to="/login" onClick={toggleMenu}><i class="fa-duotone fa-solid fa-right-to-bracket"></i></Link></li>
 >>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
+=======
+            <li><Link to="/login" onClick={toggleMenu}><i className="fa-duotone fa-solid fa-right-to-bracket"></i></Link></li>
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
           )}
         </ul>
       </nav>

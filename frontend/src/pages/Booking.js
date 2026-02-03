@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { createBooking, getUnavailableDates } from "../services/api";
-import { useNavigate } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import "../styles/Booking.css";
+import React, { useState, useEffect } from "react"
+import { createBooking, getUserBookings } from "../services/api"
+import "../styles/Booking.css"
 
 const eventTypes = [
-  { name: "Wedding", icon: "💍" },
-  { name: "Birthday Party", icon: "🎂" },
-  { name: "Corporate Event", icon: "💼" },
-  { name: "Engagement", icon: "💑" },
-  { name: "Housewarming", icon: "🏡" },
-  { name: "Festival Gathering", icon: "🎉" },
-  { name: "Other", icon: "✨" },
-];
+  "Wedding",
+  "Birthday Party",
+  "Corporate Event",
+  "Engagement",
+  "Housewarming",
+  "Festival Gathering",
+  "Other",
+]
 
 const Booking = () => {
-  const navigate = useNavigate();
+  const [bookings, setBookings] = useState([])
   const [newBooking, setNewBooking] = useState({
     eventType: "",
     date: "",
@@ -27,60 +24,36 @@ const Booking = () => {
     serviceType: "",
     contactPhone: "",
     additionalInfo: "",
-  });
-  const [blockedDates, setBlockedDates] = useState([]);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
+  })
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   useEffect(() => {
-    const fetchDates = async () => {
-        try {
-            const res = await getUnavailableDates();
-            setBlockedDates(res.data.blockedDates);
-        } catch (e) {
-            console.error("Failed to fetch dates", e);
-        }
-    };
-    fetchDates();
-  }, []);
+    fetchBookings()
+  }, [])
+
+  const fetchBookings = async () => {
+    try {
+      const response = await getUserBookings()
+      setBookings(response.data)
+    } catch (error) {
+      console.error("Error fetching bookings:", error)
+      setError("Failed to fetch bookings. Please try again.")
+    }
+  }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewBooking((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleEventTypeSelect = (type) => {
-    setNewBooking((prev) => ({ ...prev, eventType: type }));
-  };
-
-  const handleDateChange = (date) => {
-      // Offset for timezone issues, or just use YYYY-MM-DD string
-      // Simplified: create a date object in local time and grab YYYY-MM-DD
-      const offset = date.getTimezoneOffset();
-      const localDate = new Date(date.getTime() - (offset*60*1000));
-      const dateString = localDate.toISOString().split('T')[0];
-      setNewBooking((prev) => ({ ...prev, date: dateString }));
-  };
+    const { name, value } = e.target
+    setNewBooking((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!newBooking.eventType) {
-        setError("Please select an event type.");
-        return;
-    }
-    if (!newBooking.date) {
-        setError("Please select a date.");
-        return;
-    }
-    
-    setError("");
-    setSuccess("");
-    setLoading(true);
-
+    e.preventDefault()
+    setError("")
+    setSuccess("")
     try {
-      await createBooking(newBooking);
-      setSuccess("Booking submitted successfully! Check your email for confirmation.");
+      await createBooking(newBooking)
+      setSuccess("Booking submitted successfully!")
       setNewBooking({
         eventType: "",
         date: "",
@@ -91,36 +64,71 @@ const Booking = () => {
         serviceType: "",
         contactPhone: "",
         additionalInfo: "",
-      });
-      // Optional: Redirect to dashboard after a delay
-      setTimeout(() => navigate('/dashboard'), 2000);
+      })
+      fetchBookings()
     } catch (error) {
-      console.error("Error submitting booking:", error);
-      setError("Failed to submit booking. " + (error.response?.data?.message || "Please try again."));
-    } finally {
-        setLoading(false);
+      console.error("Error submitting booking:", error)
+      setError("Failed to submit booking. Please try again.")
     }
-  };
-
-  const tileDisabled = ({ date, view }) => {
-      if (view === 'month') {
-          // Disable past dates
-          if (date < new Date(new Date().setHours(0,0,0,0))) return true;
-
-          // Disable blocked dates
-          return blockedDates.some(bg => new Date(bg.date).toDateString() === date.toDateString());
-      }
-      return false;
-  };
+  }
 
   return (
-    <div className="booking-page">
-      <div className="booking-card">
-        <div className="booking-header">
-            <h1>Plan Your Special Event</h1>
-            <p>Tell us about your occasion, and we'll take care of the food!</p>
+    <div className="booking-container">
+      <h1>Make a Booking</h1>
+      {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
+      <form onSubmit={handleSubmit} className="booking-form">
+        <div className="form-group">
+          <label htmlFor="eventType">Event Type</label>
+          <select
+            id="eventType"
+            name="eventType"
+            value={newBooking.eventType}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Event Type</option>
+            {eventTypes.map((event, index) => (
+              <option key={index} value={event}>
+                {event}
+              </option>
+            ))}
+          </select>
         </div>
+        <div className="form-group">
+          <label htmlFor="date">Date</label>
+          <input type="date" id="date" name="date" value={newBooking.date} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="time">Time</label>
+          <input type="time" id="time" name="time" value={newBooking.time} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="guests">Number of Guests</label>
+          <input
+            type="number"
+            id="guests"
+            name="guests"
+            value={newBooking.guests}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="additionalInfo">Additional Information</label>
+          <textarea
+            id="additionalInfo"
+            name="additionalInfo"
+            value={newBooking.additionalInfo}
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+        <button type="submit" className="submit-button">
+          Submit Booking
+        </button>
+      </form>
 
+<<<<<<< HEAD
         {error && <div className="alert error">{error}</div>}
         {success && <div className="alert success">{success}</div>}
 
@@ -255,8 +263,36 @@ const Booking = () => {
             </button>
         </form>
       </div>
+=======
+      <h2>Your Bookings</h2>
+      {bookings.length > 0 ? (
+        <ul className="bookings-list">
+          {bookings.map((booking) => (
+            <li key={booking._id} className="booking-item">
+              <p>
+                <strong>Event Type:</strong> {booking.eventType}
+              </p>
+              <p>
+                <strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Time:</strong> {booking.time}
+              </p>
+              <p>
+                <strong>Guests:</strong> {booking.guests}
+              </p>
+              <p>
+                <strong>Status:</strong> {booking.status}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No bookings found.</p>
+      )}
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
     </div>
-  );
-};
+  )
+}
 
-export default Booking;
+export default Booking

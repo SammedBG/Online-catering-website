@@ -1,283 +1,70 @@
-/* Admin Dashboard Container */
 .admin-dashboard {
-  padding: 3rem 2rem;
-  background-color: #f7fafc;
-  min-height: 100vh;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-.admin-dashboard h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 2rem;
-}
-
-/* Stats Grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.stat-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-}
-
-.stat-card h3 {
-  font-size: 0.875rem;
-  color: #718096;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-
-.stat-card .stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2d3748;
-  margin: 0;
-}
-
-.stat-card.pending .stat-number {
-  color: #d69e2e;
-}
-
-.stat-card.confirmed .stat-number {
-  color: #38a169;
-}
-
-.stat-card.guests .stat-number {
-  color: #3182ce;
-}
-
-/* Toolbar */
-.dashboard-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.search-box input {
-  padding: 0.75rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  width: 300px;
-  font-size: 0.95rem;
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.view-btn,
-.export-btn {
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid #e2e8f0;
-  background: white;
-  color: #4a5568;
-  transition: all 0.2s;
-}
-
-.view-btn.active {
-  background: #edf2f7;
-  color: #2d3748;
-  border-color: #cbd5e0;
-}
-
-.export-btn {
-  background: #2d3748;
-  color: white;
-  border: none;
-}
-
-.export-btn:hover {
-  background: #1a202c;
-}
-
-/* Calendar View */
-.calendar-view {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-.react-calendar {
-  width: 100%;
-  max-width: 100%;
-  border: none;
-  font-family: inherit;
-}
-
-.calendar-dot-container {
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  margin-top: 2px;
-}
-
-.calendar-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.calendar-dot.pending {
-  background-color: #d69e2e;
-}
-
-.calendar-dot.confirmed {
-  background-color: #38a169;
-}
-
-.calendar-dot.cancelled {
-  background-color: #e53e3e;
-}
-
-.calendar-legend {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #edf2f7;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #4a5568;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot.pending {
-  background-color: #d69e2e;
-}
-
-.dot.confirmed {
-  background-color: #38a169;
-}
-
-.dot.cancelled {
-  background-color: #e53e3e;
-}
-
-.dot.blocked {
-  background-color: #718096;
-}
-
-.calendar-tile-blocked {
-  background-color: #cbd5e0 !important;
-  color: #4a5568;
-  cursor: pointer;
-}
-
-.calendar-hint {
-  color: #718096;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
-
-/* Existing Table Styles */
-.table-responsive {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  overflow-x: auto;
-}
-
-.bookings-table {
-  width: 100%;
-  border-collapse: collapse;
-  white-space: nowrap;
-}
-
-.bookings-table th,
-.bookings-table td {
-  padding: 1rem 1.5rem;
-  text-align: left;
-  border-bottom: 1px solid #edf2f7;
-}
-
-.bookings-table th {
-  background-color: #f7fafc;
-  color: #4a5568;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-}
-
-.bookings-table select {
-  padding: 0.4rem;
-  border-radius: 6px;
-  border: 1px solid #e2e8f0;
-}
-
-.status-badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.status-confirmed {
-  background-color: #c6f6d5;
-  color: #22543d;
-}
-
-.status-cancelled {
-  background-color: #fed7d7;
-  color: #822727;
-}
-
-.status-pending {
-  background-color: #feebc8;
-  color: #744210;
-}
-
-@media (max-width: 768px) {
-  .admin-dashboard {
-    padding: 1rem;
+    padding: 2rem;
   }
-
-  .dashboard-toolbar {
-    flex-direction: column;
-    align-items: stretch;
+  
+  .admin-dashboard h1 {
+    font-size: 2rem;
+    color: #4A5568;
+    margin-bottom: 1rem;
   }
-
-  .search-box input {
+  
+  .admin-dashboard h2 {
+    font-size: 1.5rem;
+    color: #4A5568;
+    margin-bottom: 1rem;
+  }
+  
+  .bookings-table {
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
   }
-
-  .actions {
-    overflow-x: auto;
+  
+  .bookings-table th,
+  .bookings-table td {
+    border: 1px solid #E2E8F0;
+    padding: 0.75rem;
+    text-align: left;
   }
-}
+  
+  .bookings-table th {
+    background-color: #EDF2F7;
+    font-weight: bold;
+    color: #4A5568;
+  }
+  
+  .bookings-table tr:nth-child(even) {
+    background-color: #F7FAFC;
+  }
+  
+  .bookings-table select {
+    padding: 0.25rem;
+    border-radius: 4px;
+    border: 1px solid #CBD5E0;
+  }
+  
+  .admin-dashboard.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    color: #4A5568;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-dashboard {
+      padding: 1rem;
+    }
+  
+    .bookings-table {
+      font-size: 0.875rem;
+    }
+  
+    .bookings-table th,
+    .bookings-table td {
+      padding: 0.5rem;
+    }
+  }
+  
+  

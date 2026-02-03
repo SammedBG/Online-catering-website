@@ -55,6 +55,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Cancel booking (user only)
 router.put("/:id/cancel", auth, async (req, res) => {
   try {
@@ -80,6 +81,8 @@ router.put("/:id/cancel", auth, async (req, res) => {
   }
 });
 
+=======
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
 // Confirm booking via email link
 router.get("/confirm/:id", async (req, res) => {
 =======

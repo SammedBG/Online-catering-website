@@ -14,6 +14,7 @@ import authRoutes from "./routes/auth.js"
 import bookingRoutes from "./routes/booking.js"
 import adminRoutes from "./routes/admin.js"
 import reviewRoutes from "./routes/review.js"
+<<<<<<< HEAD
 import availabilityRoutes from "./routes/availability.js"
 =======
 import express from "express";
@@ -27,9 +28,13 @@ import bookingRoutes from "./routes/booking.js";
 import adminRoutes from "./routes/Admin.js";
 import reviewRoutes from "./routes/review.js";
 >>>>>>> parent of a32b659 (Merge pull request #4 from SammedBG/master)
+=======
+>>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
 
 dotenv.config();
 
+const app = express();
+const httpServer = createServer(app);
 
 // Set allowed origin
 const allowedOrigins = [
@@ -91,7 +96,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/availability", availabilityRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
