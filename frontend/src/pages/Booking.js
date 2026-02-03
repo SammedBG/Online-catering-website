@@ -19,10 +19,6 @@ const Booking = () => {
     date: "",
     time: "",
     guests: "",
-    venue: "",
-    foodType: "",
-    serviceType: "",
-    contactPhone: "",
     additionalInfo: "",
   })
   const [error, setError] = useState("")
@@ -59,10 +55,6 @@ const Booking = () => {
         date: "",
         time: "",
         guests: "",
-        venue: "",
-        foodType: "",
-        serviceType: "",
-        contactPhone: "",
         additionalInfo: "",
       })
       fetchBookings()
@@ -151,9 +143,9 @@ const Booking = () => {
                 </div>
             </div>
 
-            {/* Section 2: Date, Time & Venue */}
+            {/* Section 2: Date & Time */}
             <div className="form-section">
-                <label className="section-label">2. When & Where?</label>
+                <label className="section-label">2. When becomes the memory?</label>
                 <div className="form-row date-time-row">
                     <div className="input-group calendar-group">
                         <label>Select Date</label>
@@ -166,94 +158,42 @@ const Booking = () => {
                         />
                         {newBooking.date && <p className="selected-date-hint">Selected: {new Date(newBooking.date).toLocaleDateString()}</p>}
                     </div>
-                    <div className="side-inputs">
-                        <div className="input-group time-group">
-                            <label>Event Start Time</label>
-                            <input 
-                                type="time" 
-                                name="time" 
-                                value={newBooking.time} 
-                                onChange={handleInputChange} 
-                                required 
-                            />
-                        </div>
-                        <div className="input-group">
-                            <label>Venue Address</label>
-                            <textarea 
-                                name="venue" 
-                                value={newBooking.venue} 
-                                onChange={handleInputChange} 
-                                placeholder="Where is the party happening?"
-                                required
-                                rows="3"
-                            />
-                        </div>
+                    <div className="input-group time-group">
+                        <label>Time</label>
+                        <input 
+                            type="time" 
+                            name="time" 
+                            value={newBooking.time} 
+                            onChange={handleInputChange} 
+                            required 
+                        />
                     </div>
                 </div>
             </div>
 
-            {/* Section 3: Guests & Menu Preferences */}
+            {/* Section 3: Guests & Details */}
             <div className="form-section">
-                <label className="section-label">3. Food & Guests</label>
-                <div className="form-row">
-                    <div className="input-group">
-                        <label>Estimated Guests</label>
-                        <input 
-                            type="number" 
-                            name="guests" 
-                            value={newBooking.guests} 
-                            onChange={handleInputChange} 
-                            placeholder="e.g. 150"
-                            min="1"
-                            required 
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Contact Number (For Event Day)</label>
-                        <input 
-                            type="tel" 
-                            name="contactPhone" 
-                            value={newBooking.contactPhone} 
-                            onChange={handleInputChange} 
-                            placeholder="+91 98765 43210"
-                            required 
-                        />
-                    </div>
-                </div>
-                
-                <div className="form-row">
-                    <div className="input-group">
-                        <label>Preferred Cuisine</label>
-                        <select name="foodType" value={newBooking.foodType} onChange={handleInputChange} required>
-                            <option value="">Select Cuisine</option>
-                            <option value="North Indian">North Indian</option>
-                            <option value="South Indian">South Indian</option>
-                            <option value="Pure Veg Standard">Pure Veg Standard</option>
-                            <option value="Jain (No Onion/Garlic)">Jain (No Onion/Garlic)</option>
-                            <option value="Continental">Continental</option>
-                            <option value="Fusion">Fusion / Mix</option>
-                        </select>
-                    </div>
-                    <div className="input-group">
-                        <label>Service Style</label>
-                        <select name="serviceType" value={newBooking.serviceType} onChange={handleInputChange} required>
-                            <option value="">Select Service</option>
-                            <option value="Buffet System">Buffet System</option>
-                            <option value="Table Service (Sit-down)">Table Service (Sit-down)</option>
-                            <option value="Traditional Leaf Service">Traditional Leaf Service</option>
-                            <option value="Food Packets">Food Packets</option>
-                        </select>
-                    </div>
-                </div>
-
+                <label className="section-label">3. The finer details</label>
                 <div className="input-group">
-                    <label>Additional Requests / Notes</label>
+                    <label>Estimated Guests</label>
+                    <input 
+                        type="number" 
+                        name="guests" 
+                        value={newBooking.guests} 
+                        onChange={handleInputChange} 
+                        placeholder="e.g. 150"
+                        min="1"
+                        required 
+                    />
+                </div>
+                <div className="input-group">
+                    <label>Additional Requests (Optional)</label>
                     <textarea
                         name="additionalInfo"
                         value={newBooking.additionalInfo}
                         onChange={handleInputChange}
-                        placeholder="Any specific dishes, dietary restrictions, or special instructions?"
-                        rows="3"
+                        placeholder="Any dietary restrictions, special menu items, or location details?"
+                        rows="4"
                     ></textarea>
                 </div>
             </div>
