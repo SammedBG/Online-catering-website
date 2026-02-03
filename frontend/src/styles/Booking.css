@@ -1,9 +1,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Premium Booking Page Layout */
 =======
 /* Booking Page Layout */
 >>>>>>> parent of ea82fad (Merge pull request #6 from SammedBG/master)
+=======
+/* Booking Page Layout */
+>>>>>>> parent of a282f54 (feat: add comprehensive styling for the booking page, including layout, form elements, and calendar overrides.)
 .booking-page {
   min-height: 90vh;
   padding: 3rem 1.5rem;
@@ -190,11 +194,14 @@
   from {
     opacity: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
     transform: translateY(20px);
 =======
 /* General Styles */
 .container-1{
 =======
+=======
+>>>>>>> parent of a282f54 (feat: add comprehensive styling for the booking page, including layout, form elements, and calendar overrides.)
     transform: translateY(10px);
   }
 >>>>>>> parent of ea82fad (Merge pull request #6 from SammedBG/master)
@@ -315,6 +322,7 @@
   }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
   /* Responsive Styles */
@@ -364,6 +372,8 @@
   
 >>>>>>> parent of 13fb6a3 (Merge pull request #5 from SammedBG/master)
 =======
+=======
+>>>>>>> parent of a282f54 (feat: add comprehensive styling for the booking page, including layout, form elements, and calendar overrides.)
 
 /* Calendar Specifics */
 .booking-calendar {
@@ -376,14 +386,30 @@
 
 .date-time-row {
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
 }
 
+=======
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+}
+
+.side-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+>>>>>>> parent of a282f54 (feat: add comprehensive styling for the booking page, including layout, form elements, and calendar overrides.)
 .selected-date-hint {
   margin-top: 0.5rem;
   color: #38a169;
   font-weight: 600;
   font-size: 0.9rem;
+<<<<<<< HEAD
 }
 >>>>>>> parent of ea82fad (Merge pull request #6 from SammedBG/master)
+=======
+}
+>>>>>>> parent of a282f54 (feat: add comprehensive styling for the booking page, including layout, form elements, and calendar overrides.)
