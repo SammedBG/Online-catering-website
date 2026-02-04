@@ -5,11 +5,37 @@ import { isAdmin } from "../middleware/isAdmin.js";
 
 const router = express.Router();
 
+import Booking from "../models/booking.js";
+
 // Get all blocked dates (public route - users need to see this)
 router.get("/", async (req, res) => {
   try {
-    const blockedDates = await BlockedDate.find().sort({ date: 1 });
-    res.json(blockedDates);
+    // 1. Fetch manually blocked dates by Admin
+    const manualBlockedDates = await BlockedDate.find().sort({ date: 1 });
+
+    // 2. Fetch dates with CONFIRMED bookings
+    const confirmedBookings = await Booking.find({ status: 'confirmed' }).select('date');
+
+    // 3. Merge them into a standardized format
+    const confirmedDatesFormatted = confirmedBookings.map(b => ({
+        _id: b._id, // Use booking ID
+        date: b.date,
+        reason: 'Fully Booked',
+        note: 'This date has a confirmed event.',
+        type: 'booking' // Distinguisher
+    }));
+
+    // Convert to simple array of objects for response
+    // We keep existing blocked dates as they are (properties match schema)
+    const allBlockedDates = [
+        ...manualBlockedDates.map(b => ({
+            ...b.toObject(),
+            type: 'manual'
+        })),
+        ...confirmedDatesFormatted
+    ];
+
+    res.json(allBlockedDates);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

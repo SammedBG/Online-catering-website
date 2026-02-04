@@ -60,10 +60,19 @@ export const sendOwnerBookingNotification = async (booking) => {
         <p><a href="${confirmUrl}">Click here to confirm the booking</a></p>
       `,
     })
+
     console.log("Owner booking notification email sent")
   } catch (error) {
-    console.error("Error sending owner booking notification email:", error)
-    throw error
+    if (error.code === 'EAUTH') {
+        console.warn("⚠️  Email Authentication Failed: Please check your EMAIL_USER and EMAIL_PASS in .env file.");
+        console.warn("   (Use an App Password if using Gmail with 2FA)");
+    } else {
+        console.error("Error sending owner booking notification email:", error.message);
+    }
+    // We do NOT throw here to prevent crashing the main flow, or we can consume it.
+    // If we throw, the caller must catch. 
+    // The existing caller catches it, so throwing is fine, but let's conform to the catch block's expectation.
+    throw error;
   }
 }
 
