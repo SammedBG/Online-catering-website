@@ -1,0 +1,170 @@
+/* Admin Layout Container */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f7fafc;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    background-color: #1a202c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+.sidebar-brand {
+    padding: 1.5rem;
+    border-bottom: 1px solid #2d3748;
+}
+
+.sidebar-brand h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #edf2f7;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 1rem 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: #a0aec0;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+    background-color: #2d3748;
+    color: white;
+    border-left: 4px solid #3182ce;
+}
+
+.sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #2d3748;
+}
+
+/* Admin Logout Button */
+.admin-logout-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.admin-logout-btn:hover {
+    background-color: #c53030;
+}
+
+/* Main Content Area */
+.admin-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Admin Header */
+.admin-header {
+    background-color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.admin-header h3 {
+    margin: 0;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #3182ce;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Page Content */
+.admin-page-container {
+    padding: 2rem;
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        min-height: auto;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem;
+        justify-content: space-between;
+    }
+
+    .sidebar-nav {
+        display: none;
+        /* Can implement a toggle for mobile later */
+    }
+
+    .sidebar-brand {
+        border-bottom: none;
+        padding: 0.5rem;
+    }
+
+    .sidebar-footer {
+        border-top: none;
+        padding: 0.5rem;
+    }
+
+    .admin-logout-btn {
+        width: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    .admin-content {
+        height: auto;
+        /* Allow natural scroll on mobile */
+    }
+}
