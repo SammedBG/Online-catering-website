@@ -1,5 +1,6 @@
 import express from "express";
 import Booking from "../models/booking.js";
+import User from "../models/User.js";
 import { auth } from "../middleware/auth.js";
 import { isAdmin } from "../middleware/isAdmin.js";
 import { getIO } from "../socket.js";
@@ -49,6 +50,24 @@ router.put("/bookings/:id", auth, isAdmin, async (req, res) => {
     }
 
     res.json(booking);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Get all users
+router.get("/users", auth, isAdmin, async (req, res) => {
+  try {
+    const users = await User.find().select("-password").sort({ createdAt: -1 });
+    
+    // Get booking stats for each user (optional, but useful)
+    const usersWithStats = await Promise.all(users.map(async (user) => {
+        const bookingCount = await Booking.countDocuments({ user: user._id });
+        return { ...user.toObject(), bookingCount };
+    }));
+
+    res.json(usersWithStats);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

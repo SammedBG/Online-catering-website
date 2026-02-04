@@ -72,8 +72,15 @@ export const cancelBooking = (bookingId) => api.put(`/bookings/${bookingId}/canc
 
 // Admin API calls
 export const getAdminBookings = () => api.get("/admin/bookings");
+export const getUsers = () => api.get("/admin/users");
 export const updateBookingStatus = (bookingId, status) =>
   api.put(`/admin/bookings/${bookingId}`, { status });
+
+// Blocked Dates API calls
+export const getBlockedDates = () => api.get("/blocked-dates");
+export const getAdminBlockedDates = () => api.get("/blocked-dates/admin");
+export const blockDate = (dateData) => api.post("/blocked-dates", dateData);
+export const unblockDate = (id) => api.delete(`/blocked-dates/${id}`);
 
 // Review API calls
 export const getReviews = () => api.get("/reviews");

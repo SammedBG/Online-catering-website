@@ -1,0 +1,260 @@
+/* Availability Calendar Container */
+.availability-calendar-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.calendar-section h3,
+.blocked-dates-list h3 {
+    color: #2d3748;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Calendar Styling */
+.react-calendar {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.react-calendar__tile {
+    position: relative;
+    padding: 1rem 0.5rem;
+    font-size: 0.9rem;
+}
+
+.react-calendar__tile--active {
+    background: #3182ce;
+    color: white;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background-color: #edf2f7;
+}
+
+/* Blocked Date Indicator */
+.blocked-date {
+    background-color: #fff5f5 !important;
+    color: #9b1c1c !important;
+    font-weight: 600;
+}
+
+.blocked-indicator {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+/* Blocked Dates List */
+.blocked-dates-list {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.blocked-dates-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blocked-date-item {
+    padding: 1rem;
+    border-bottom: 1px solid #edf2f7;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.blocked-date-item:last-child {
+    border-bottom: none;
+}
+
+.date-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-info strong {
+    color: #2d3748;
+    font-size: 0.95rem;
+}
+
+.reason-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.reason-badge.fully-booked {
+    background: #feecdc;
+    color: #9c4221;
+}
+
+.reason-badge.holiday {
+    background: #def7ec;
+    color: #03543f;
+}
+
+.reason-badge.maintenance {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reason-badge.other {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.note {
+    font-size: 0.85rem;
+    color: #718096;
+    margin: 0;
+}
+
+.unblock-btn {
+    align-self: flex-start;
+    background: white;
+    color: #c53030;
+    border: 1px solid #c53030;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.unblock-btn:hover {
+    background: #c53030;
+    color: white;
+}
+
+.empty-message {
+    text-align: center;
+    color: #a0aec0;
+    padding: 2rem 1rem;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+    margin: 0 0 1.5rem 0;
+    color: #2d3748;
+    font-size: 1.25rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.cancel-btn-modal,
+.block-btn-modal {
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-btn-modal {
+    background: white;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+}
+
+.cancel-btn-modal:hover {
+    background: #f7fafc;
+}
+
+.block-btn-modal {
+    background: #c53030;
+    border: none;
+    color: white;
+}
+
+.block-btn-modal:hover {
+    background: #9b2c2c;
+}
+
+.block-btn-modal:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .availability-calendar-container {
+        grid-template-columns: 1fr;
+    }
+
+    .blocked-dates-list {
+        max-height: 300px;
+    }
+}

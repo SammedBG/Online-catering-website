@@ -13,6 +13,7 @@ import authRoutes from "./routes/auth.js"
 import bookingRoutes from "./routes/booking.js"
 import adminRoutes from "./routes/admin.js"
 import reviewRoutes from "./routes/review.js"
+import blockedDatesRoutes from "./routes/blockedDates.js"
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/blocked-dates", blockedDatesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

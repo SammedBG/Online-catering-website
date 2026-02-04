@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { getAdminBookings, updateBookingStatus } from "../services/api";
+import { getAdminBookings, updateBookingStatus, getUsers } from "../services/api";
 import io from "socket.io-client";
 import Calendar from "react-calendar";
+import AvailabilityCalendar from "../components/AvailabilityCalendar";
+import BookingDetailsModal from "../components/BookingDetailsModal";
 import "react-calendar/dist/Calendar.css";
 import "../styles/AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState([]);
+  const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'calendar'
+  const [activeTab, setActiveTab] = useState("bookings"); // 'bookings', 'availability', 'users'
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   useEffect(() => {
     fetchBookings();
+    fetchUsers();
 
     const socket = io(process.env.REACT_APP_API_URL || "http://localhost:5000");
 
@@ -22,16 +28,22 @@ const AdminDashboard = () => {
 
     socket.on("bookingConfirmed", (updatedBooking) => {
         setBookings((prev) => prev.map(b => b._id === updatedBooking._id ? updatedBooking : b));
+        if (selectedBooking && selectedBooking._id === updatedBooking._id) {
+            setSelectedBooking(updatedBooking);
+        }
     });
 
     socket.on("bookingUpdated", (updatedBooking) => {
         setBookings((prev) => prev.map(b => b._id === updatedBooking._id ? updatedBooking : b));
+        if (selectedBooking && selectedBooking._id === updatedBooking._id) {
+            setSelectedBooking(updatedBooking);
+        }
     });
 
     return () => {
         socket.disconnect();
     }
-  }, []);
+  }, [selectedBooking]);
 
   const fetchBookings = async () => {
     try {
@@ -43,13 +55,37 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchUsers = async () => {
+      try {
+          const response = await getUsers();
+          setUsers(response.data);
+      } catch (error) {
+          console.error("Error fetching users:", error);
+      }
+  };
+// ... rest of the functions
+
+
   const handleStatusChange = async (bookingId, newStatus) => {
     try {
-      await updateBookingStatus(bookingId, newStatus);
-      setBookings(prev => prev.map(b => b._id === bookingId ? {...b, status: newStatus} : b));
+      const response = await updateBookingStatus(bookingId, newStatus);
+      const updatedBooking = response.data;
+      
+      setBookings(prev => prev.map(b => b._id === bookingId ? updatedBooking : b));
+      if (selectedBooking && selectedBooking._id === bookingId) {
+          setSelectedBooking(updatedBooking);
+      }
     } catch (error) {
       setError("Failed to update status");
     }
+  };
+
+  const handleViewBooking = (booking) => {
+      setSelectedBooking(booking);
+  };
+
+  const closeBookingModal = () => {
+      setSelectedBooking(null);
   };
 
   const downloadCSV = () => {
@@ -127,6 +163,32 @@ const AdminDashboard = () => {
           </div>
       </div>
 
+      {/* Tab Navigation */}
+      <div className="admin-tabs">
+          <button 
+              className={`admin-tab-btn ${activeTab === 'bookings' ? 'active' : ''}`}
+              onClick={() => setActiveTab('bookings')}
+          >
+              📋 Bookings Management
+          </button>
+          <button 
+              className={`admin-tab-btn ${activeTab === 'users' ? 'active' : ''}`}
+              onClick={() => setActiveTab('users')}
+          >
+              👥 User Management
+          </button>
+          <button 
+              className={`admin-tab-btn ${activeTab === 'availability' ? 'active' : ''}`}
+              onClick={() => setActiveTab('availability')}
+          >
+              🗓️ Availability Management
+          </button>
+      </div>
+
+      {/* Conditional Content Based on Active Tab */}
+      {activeTab === 'bookings' && (
+          <>
+
       <div className="dashboard-toolbar">
           <div className="search-box">
               <input 
@@ -181,14 +243,12 @@ const AdminDashboard = () => {
                     <td>{booking.user?.name || 'Unknown'}</td>
                     <td><span className={`status-badge ${getStatusClass(booking.status)}`}>{booking.status}</span></td>
                     <td>
-                    <select
-                        value={booking.status}
-                        onChange={(e) => handleStatusChange(booking._id, e.target.value)}
-                    >
-                        <option value="pending">Pending</option>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
+                        <button 
+                            className="view-details-btn"
+                            onClick={() => handleViewBooking(booking)}
+                        >
+                            View Details
+                        </button>
                     </td>
                 </tr>
                 )) : (
@@ -209,6 +269,66 @@ const AdminDashboard = () => {
                   <div className="legend-item"><span className="dot cancelled"></span> Cancelled</div>
               </div>
           </div>
+      )}
+          </>
+      )}
+      
+      {activeTab === 'users' && (
+          <div className="users-section">
+              <div className="section-header">
+                  <h2>Registered Users ({users.length})</h2>
+              </div>
+              <div className="table-responsive">
+                  <table className="bookings-table">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Role</th>
+                              <th>Joined Date</th>
+                              <th>Total Bookings</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {users.length > 0 ? users.map(user => (
+                              <tr key={user._id}>
+                                  <td><div className="user-avatar-cell">
+                                      <div className="avatar-small">{user.name.charAt(0)}</div>
+                                      {user.name}
+                                  </div></td>
+                                  <td>{user.email}</td>
+                                  <td>
+                                      <span className={`role-badge ${user.role}`}>
+                                          {user.role}
+                                      </span>
+                                  </td>
+                                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                                  <td>{user.bookingCount || 0}</td>
+                              </tr>
+                          )) : (
+                              <tr><td colSpan="5" style={{textAlign: 'center'}}>No users found.</td></tr>
+                          )}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      )}
+
+      {activeTab === 'availability' && (
+          <div className="availability-section">
+              <h2>Manage Date Availability</h2>
+              <p>Block dates when you cannot accept new bookings (holidays, fully booked, maintenance, etc.)</p>
+              <AvailabilityCalendar />
+          </div>
+      )}
+
+      {/* Booking Details Modal */}
+      {selectedBooking && (
+          <BookingDetailsModal 
+              booking={selectedBooking} 
+              onClose={closeBookingModal}
+              onUpdateStatus={handleStatusChange}
+          />
       )}
     </div>
   );

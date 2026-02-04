@@ -133,6 +133,14 @@
   outline: none;
 }
 
+.date-note {
+  display: block;
+  margin-top: 0.5rem;
+  color: #d69e2e;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
 /* Submit Button */
 .submit-booking-btn {
   width: 100%;

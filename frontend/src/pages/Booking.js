@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createBooking } from "../services/api";
+import React, { useState, useEffect } from "react";
+import { createBooking, getBlockedDates } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/Booking.css";
 
@@ -25,6 +25,20 @@ const Booking = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [blockedDates, setBlockedDates] = useState([]);
+
+  useEffect(() => {
+    // Fetch blocked dates when component mounts
+    const fetchBlockedDates = async () => {
+      try {
+        const response = await getBlockedDates();
+        setBlockedDates(response.data.map(bd => new Date(bd.date).toISOString().split('T')[0]));
+      } catch (error) {
+        console.error('Error fetching blocked dates:', error);
+      }
+    };
+    fetchBlockedDates();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +53,12 @@ const Booking = () => {
     e.preventDefault();
     if (!newBooking.eventType) {
         setError("Please select an event type.");
+        return;
+    }
+
+    // Check if selected date is blocked
+    if (blockedDates.includes(newBooking.date)) {
+        setError("This date is not available. Please select another date.");
         return;
     }
     
@@ -98,7 +118,7 @@ const Booking = () => {
 
             {/* Section 2: Date & Time */}
             <div className="form-section">
-                <label className="section-label">2. When becomes the memory?</label>
+                <label className="section-label">2. When does the memory begin?</label>
                 <div className="form-row">
                     <div className="input-group">
                         <label>Date</label>
@@ -110,6 +130,11 @@ const Booking = () => {
                             required 
                             min={new Date().toISOString().split('T')[0]}
                         />
+                        {blockedDates.length > 0 && (
+                            <small className="date-note">
+                                ⚠️ Some dates may be unavailable (fully booked or holidays)
+                            </small>
+                        )}
                     </div>
                     <div className="input-group">
                         <label>Time</label>
