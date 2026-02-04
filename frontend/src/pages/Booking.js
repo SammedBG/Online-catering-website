@@ -43,6 +43,14 @@ const Booking = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewBooking((prev) => ({ ...prev, [name]: value }));
+
+    if (name === 'date') {
+        if (blockedDates.includes(value)) {
+            setError("⛔ This date is unavailable (fully booked or holiday). Please choose another.");
+        } else {
+            setError("");
+        }
+    }
   };
 
   const handleEventTypeSelect = (type) => {
