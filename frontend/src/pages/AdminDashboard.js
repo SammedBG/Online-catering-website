@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { getAdminBookings, updateBookingStatus, getUsers } from "../services/api";
+import { getAdminBookings, updateBookingStatus, getUsers, getAdminReviews, deleteReview } from "../services/api";
 import io from "socket.io-client";
 import Calendar from "react-calendar";
 import AvailabilityCalendar from "../components/AvailabilityCalendar";
@@ -10,15 +10,19 @@ import "../styles/AdminDashboard.css";
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [users, setUsers] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'calendar'
-  const [activeTab, setActiveTab] = useState("bookings"); // 'bookings', 'availability', 'users'
+  const [activeTab, setActiveTab] = useState("bookings"); // 'bookings', 'availability', 'users', 'reviews'
   const [selectedBooking, setSelectedBooking] = useState(null);
 
   useEffect(() => {
     fetchBookings();
     fetchUsers();
+    fetchReviews();
+
+// ... existing socket code ...
 
     const socket = io(process.env.REACT_APP_API_URL || "http://localhost:5000");
 
@@ -63,6 +67,26 @@ const AdminDashboard = () => {
           console.error("Error fetching users:", error);
       }
   };
+
+  const fetchReviews = async () => {
+      try {
+          const response = await getAdminReviews();
+          setReviews(response.data);
+      } catch (error) {
+          console.error("Error fetching reviews:", error);
+      }
+  };
+
+  const handleDeleteReview = async (id) => {
+      if (!window.confirm("Are you sure you want to delete this review?")) return;
+      try {
+          await deleteReview(id);
+          setReviews(prev => prev.filter(r => r._id !== id));
+      } catch (error) {
+          console.error("Error deleting review:", error);
+          alert("Failed to delete review");
+      }
+  };
 // ... rest of the functions
 
 
@@ -105,11 +129,37 @@ const AdminDashboard = () => {
 
   // Stats Calculation
   const stats = useMemo(() => {
+    // 1. Basic Stats
+    const total = bookings.length;
+    const pending = bookings.filter(b => b.status === 'pending').length;
+    const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+    const guests = bookings.reduce((acc, curr) => acc + (parseInt(curr.guests) || 0), 0);
+
+    // 2. Monthly Trends
+    const monthlyData = {};
+    bookings.forEach(b => {
+        const monthYear = new Date(b.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        monthlyData[monthYear] = (monthlyData[monthYear] || 0) + 1;
+    });
+
+    // 3. Popular Event Types
+    const eventCounts = {};
+    bookings.forEach(b => {
+        eventCounts[b.eventType] = (eventCounts[b.eventType] || 0) + 1;
+    });
+    
+    // Sort events by popularity
+    const sortedEvents = Object.entries(eventCounts)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 5); // Top 5
+
     return {
-        total: bookings.length,
-        pending: bookings.filter(b => b.status === 'pending').length,
-        confirmed: bookings.filter(b => b.status === 'confirmed').length,
-        guests: bookings.reduce((acc, curr) => acc + (parseInt(curr.guests) || 0), 0)
+        total,
+        pending,
+        confirmed,
+        guests,
+        monthlyBookings: monthlyData,
+        popularEvents: sortedEvents
     };
   }, [bookings]);
 
@@ -176,6 +226,18 @@ const AdminDashboard = () => {
               onClick={() => setActiveTab('users')}
           >
               👥 User Management
+          </button>
+          <button 
+              className={`admin-tab-btn ${activeTab === 'reviews' ? 'active' : ''}`}
+              onClick={() => setActiveTab('reviews')}
+          >
+              ⭐ Reviews
+          </button>
+          <button 
+              className={`admin-tab-btn ${activeTab === 'analytics' ? 'active' : ''}`}
+              onClick={() => setActiveTab('analytics')}
+          >
+              📈 Analytics
           </button>
           <button 
               className={`admin-tab-btn ${activeTab === 'availability' ? 'active' : ''}`}
@@ -310,6 +372,116 @@ const AdminDashboard = () => {
                           )}
                       </tbody>
                   </table>
+              </div>
+          </div>
+
+      )}
+
+      {activeTab === 'reviews' && (
+          <div className="reviews-section">
+              <div className="section-header">
+                  <h2>Customer Reviews ({reviews.length})</h2>
+              </div>
+               <div className="table-responsive">
+                  <table className="bookings-table">
+                      <thead>
+                          <tr>
+                              <th>Customer</th>
+                              <th>Rating</th>
+                              <th>Comment</th>
+                              <th>Date</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {reviews.length > 0 ? reviews.map(review => (
+                              <tr key={review._id}>
+                                  <td>{review.name || 'Anonymous'}</td>
+                                  <td>
+                                      <span className="star-rating">
+                                          {'⭐'.repeat(review.rating)}
+                                      </span> 
+                                      <span className="rating-number">({review.rating}/5)</span>
+                                  </td>
+                                  <td>
+                                      <div className="review-comment">"{review.comment}"</div>
+                                  </td>
+                                  <td>{new Date(review.createdAt).toLocaleDateString()}</td>
+                                  <td>
+                                      <button 
+                                          className="delete-btn"
+                                          onClick={() => handleDeleteReview(review._id)}
+                                          title="Delete Review"
+                                      >
+                                          🗑️
+                                      </button>
+                                  </td>
+                              </tr>
+                          )) : (
+                              <tr><td colSpan="5" style={{textAlign: 'center'}}>No reviews found.</td></tr>
+                          )}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      )}
+
+
+
+      {activeTab === 'analytics' && (
+          <div className="analytics-section">
+              <div className="section-header">
+                  <h2>Business Insights</h2>
+              </div>
+              
+              <div className="analytics-grid">
+                  {/* Monthly Trends Chart */}
+                  <div className="analytics-card">
+                      <h3>Monthly Booking Trends</h3>
+                      <div className="chart-container">
+                          {Object.keys(stats.monthlyBookings).length > 0 ? (
+                              Object.entries(stats.monthlyBookings).map(([month, count]) => (
+                                  <div key={month} className="chart-bar-row">
+                                      <span className="chart-label">{month}</span>
+                                      <div className="chart-bar-wrapper">
+                                          <div 
+                                              className="chart-bar" 
+                                              style={{ width: `${(count / Math.max(...Object.values(stats.monthlyBookings))) * 100}%` }}
+                                          >
+                                              <span className="chart-value">{count}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              ))
+                          ) : (
+                              <p className="no-data">No booking data available yet.</p>
+                          )}
+                      </div>
+                  </div>
+
+                  {/* Popular Events Chart */}
+                  <div className="analytics-card">
+                      <h3>Top Event Types</h3>
+                      <div className="chart-container">
+                          {stats.popularEvents.length > 0 ? (
+                              stats.popularEvents.map(([event, count]) => (
+                                  <div key={event} className="chart-bar-row">
+                                      <span className="chart-label">{event}</span>
+                                      <div className="chart-bar-wrapper">
+                                          <div 
+                                              className="chart-bar secondary" 
+                                              style={{ width: `${(count / Math.max(...stats.popularEvents.map(([,c]) => c))) * 100}%` }}
+                                          >
+                                              <span className="chart-value">{count}</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              ))
+                          ) : (
+                              <p className="no-data">No event data available yet.</p>
+                          )}
+                      </div>
+                  </div>
               </div>
           </div>
       )}

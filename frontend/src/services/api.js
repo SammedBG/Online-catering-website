@@ -83,7 +83,10 @@ export const blockDate = (dateData) => api.post("/blocked-dates", dateData);
 export const unblockDate = (id) => api.delete(`/blocked-dates/${id}`);
 
 // Review API calls
+// Review API calls
 export const getReviews = () => api.get("/reviews");
+export const getAdminReviews = () => api.get("/reviews/all");
 export const createReview = (reviewData) => api.post("/reviews", reviewData);
+export const deleteReview = (id) => api.delete(`/reviews/${id}`);
 
 export default api;
