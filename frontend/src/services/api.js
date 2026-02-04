@@ -43,7 +43,7 @@ api.interceptors.response.use(
         // Clear tokens and redirect to login only if refresh fails for a logged-in user
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/auth";
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
@@ -68,6 +68,7 @@ export const getCurrentUser = () => api.get("/auth/user");
 // Booking API calls
 export const createBooking = (bookingData) => api.post("/bookings", bookingData);
 export const getUserBookings = () => api.get("/bookings");
+export const cancelBooking = (bookingId) => api.put(`/bookings/${bookingId}/cancel`);
 
 // Admin API calls
 export const getAdminBookings = () => api.get("/admin/bookings");
