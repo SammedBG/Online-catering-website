@@ -47,22 +47,22 @@ const Footer = () => {
             <p>Let Mahaveer Catering transform your special occasion into a masterpiece with our professional touch.</p>
           </div>
           <div className="icons-f">
-            <a href="https://wa.me/9739676924 "><i class="fa-brands fa-whatsapp "></i></a>
-            <a href="/"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/sachin_caterers_halaga"><i class="fa-brands fa-instagram"></i></a>
-            <a href="/"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/9739676924 "><i className="fa-brands fa-whatsapp "></i></a>
+            <a href="/"><i className="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/sachin_caterers_halaga"><i className="fa-brands fa-instagram"></i></a>
+            <a href="/"><i className="fa-brands fa-youtube"></i></a>
           </div>
         </div>
         <div className="address">
           <h3>Contact Now</h3>
           <div className="para-2">
-            <i class="fa-solid fa-location-dot"></i><p>No:389/B Patil Galli Halaga,Belagavi,karnataka-590020 </p>
+            <i className="fa-solid fa-location-dot"></i><p>No:389/B Patil Galli Halaga,Belagavi,karnataka-590020 </p>
           </div>
           <div className="para-2">
-            <i class="fa-solid fa-phone"></i><p>Phone: +91 9742728429</p>
+            <i className="fa-solid fa-phone"></i><p>Phone: +91 9742728429</p>
           </div>
           <div className="para-2">
-            <i class="fa-regular fa-envelope"></i><p><a href="/">Email:sachininchal914@gmail.com</a></p>
+            <i className="fa-regular fa-envelope"></i><p><a href="/">Email:sachininchal914@gmail.com</a></p>
           </div>
 
         </div>

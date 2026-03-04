@@ -25,15 +25,15 @@ const Location = () => {
           <div className="location-info">
             <h2>Address</h2>
             <div className="location-icon">
-              <i class="fa-solid fa-location-dot"></i><span>No:389/B Patil Galli Halaga,Belagavi,karnataka-590020 </span>
+              <i className="fa-solid fa-location-dot"></i><span>No:389/B Patil Galli Halaga,Belagavi,karnataka-590020 </span>
             </div>
             <h2>Contact</h2>
             <a className='w-me' href="https://wa.me/9742728429 ">Whatsapp Now</a>
             <div className="location-icon">
-              <i class="fa-solid fa-phone"></i><span>Phone: +91 9742728429</span>
+              <i className="fa-solid fa-phone"></i><span>Phone: +91 9742728429</span>
             </div>
             <div className="location-icon">
-            <i class="fa-regular fa-envelope"></i>
+            <i className="fa-regular fa-envelope"></i>
             <span>Email:sachininchal914@gmail.com</span>
             </div>
           </div>

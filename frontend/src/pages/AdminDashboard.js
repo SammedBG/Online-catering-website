@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { getAdminBookings, updateBookingStatus, getUsers, getAdminReviews, deleteReview } from "../services/api";
 import io from "socket.io-client";
 import Calendar from "react-calendar";
@@ -16,6 +16,12 @@ const AdminDashboard = () => {
   const [viewMode, setViewMode] = useState("list"); // 'list' or 'calendar'
   const [activeTab, setActiveTab] = useState("bookings"); // 'bookings', 'availability', 'users', 'reviews'
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const selectedBookingRef = useRef(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    selectedBookingRef.current = selectedBooking;
+  }, [selectedBooking]);
 
   useEffect(() => {
     fetchBookings();
@@ -32,14 +38,14 @@ const AdminDashboard = () => {
 
     socket.on("bookingConfirmed", (updatedBooking) => {
         setBookings((prev) => prev.map(b => b._id === updatedBooking._id ? updatedBooking : b));
-        if (selectedBooking && selectedBooking._id === updatedBooking._id) {
+        if (selectedBookingRef.current && selectedBookingRef.current._id === updatedBooking._id) {
             setSelectedBooking(updatedBooking);
         }
     });
 
     socket.on("bookingUpdated", (updatedBooking) => {
         setBookings((prev) => prev.map(b => b._id === updatedBooking._id ? updatedBooking : b));
-        if (selectedBooking && selectedBooking._id === updatedBooking._id) {
+        if (selectedBookingRef.current && selectedBookingRef.current._id === updatedBooking._id) {
             setSelectedBooking(updatedBooking);
         }
     });
@@ -47,7 +53,7 @@ const AdminDashboard = () => {
     return () => {
         socket.disconnect();
     }
-  }, [selectedBooking]);
+  }, []);
 
   const fetchBookings = async () => {
     try {

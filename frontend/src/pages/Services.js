@@ -23,7 +23,7 @@ function Services() {
                         <div className="section-card-3">
                             <img src={event1} alt="card-1" />
                             <h4>Engagement</h4>
-                            <p><ul>
+                            <div><ul>
                                 <li>We serve 50 to 1000+ guests for a perfect engagement.</li>
 
                                 <li>Our menu offers traditional, gourmet, and custom vegetarian dishes.</li>
@@ -35,12 +35,12 @@ function Services() {
                                 <li>Our staff provides smooth, courteous, and professional service.</li>
 
                                 <li>Elegant decor and stylish food presentation enhance the event.</li>
-                            </ul></p>
+                            </ul></div>
                         </div>
                         <div className="section-card-3">
                             <img src={event2} alt="card-2" loading='lazy' />
                             <h4>House Warming</h4>
-                            <p>
+                            <div>
                                 <ul>
                                     <li>We handle 50 to 1000+ guests for a seamless celebration.</li><li>Our menu offers traditional, festive, and custom vegetarian dishes.</li>
 
@@ -51,7 +51,7 @@ function Services() {
                                     <li>Our staff provides smooth, friendly, and efficient service.</li>
 
                                     <li>Elegant setups enhance the warmth of your home event.</li>
-                                </ul>  </p>
+                                </ul></div>
                         </div>
 
                     </div>
@@ -61,7 +61,7 @@ function Services() {
                         <div className="section-card-3">
                             <img src={event7} alt="card-2" loading='lazy' />
                             <h4>Naming Ceremony</h4>
-                            <p><ul>
+                            <div><ul>
                                 <li>We manage 50 to 1000+ guests, ensuring a heartfelt naming ceremony.</li>
 
                                 <li>Our menu features traditional, festive, and personalized delicacies.</li>
@@ -73,19 +73,19 @@ function Services() {
                                 <li>Our dedicated staff ensures smooth, polite, and welcoming service.</li>
 
                                 <li>Graceful presentation and decorative arrangements elevate the celebration.</li>
-                            </ul></p>
+                            </ul></div>
                         </div>
                         <div className="section-card-3">
                             <img src={event11} alt="card-1" />
                             <h4>Wedding Event</h4>
-                            <p><ul>
+                            <div><ul>
                                 <li>We cater to 100 to 3000+ guests for a grand wedding.</li>
                                 <li>We ensure strict hygiene with fresh ingredients and sanitized kitchens.</li>
                                 <li>Our pure vegetarian menu includes Jain, Satvik, and custom options.</li>
                                 <li>We offer Indian, International cuisines, live counters, and desserts.</li>
                                 <li>Our trained staff provides seamless buffet, plated meals, and live cooking.</li>
                                 <li>Elegant food presentation and décor enhance the wedding ambiance.</li>
-                            </ul></p>
+                            </ul></div>
                         </div>
                     </div>
                     <div className="section-card-block">
@@ -93,7 +93,7 @@ function Services() {
                         <div className="section-card-3">
                             <img src={event12} alt="card-2" loading='lazy' />
                             <h4>Birthday Party</h4>
-                            <p><ul>
+                            <div><ul>
                                 <li>We handle 50 to 1000+ guests, ensuring a joyful birthday party.</li>
 
                                 <li>Our diverse menu includes kid-friendly, healthy, and special treats.</li>
@@ -110,7 +110,7 @@ function Services() {
                         <div className="section-card-3">
                             <img src={event13} alt="card-3" />
                             <h4>Corporate Event</h4>
-                            <p><ul>
+                            <div><ul>
                                 <li>We serve 50 to 2000+ guests, ensuring a seamless corporate event.</li>
 
                                 <li>Our custom menus suit meetings, seminars, and business gatherings.</li>
@@ -122,7 +122,7 @@ function Services() {
                                 <li>Our expert staff ensures fast, professional, and courteous service.</li>
 
                                 <li>Elegant presentation and decor enhance the corporate ambiance.</li>
-                            </ul></p>
+                            </ul></div>
                         </div>
                     </div>
                 </div>

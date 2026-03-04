@@ -5,6 +5,7 @@ import Footer from "./components/Footer"
 import { AuthProvider } from "./context/AuthContext"
 import ScrollToTop from "./components/scrollToTop"
 import AdminLayout from "./components/AdminLayout"
+import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/global.css"
 
 // Lazy load pages
@@ -20,6 +21,7 @@ const Services = lazy(() => import("./pages/Services"))
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
 const ResetPassword = lazy(() => import("./pages/ResetPassword"))
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"))
+const NotFound = lazy(() => import("./pages/NotFound"))
 
 const Loading = () => <div className="loading">Loading...</div>
 
@@ -43,7 +45,7 @@ const App = () => {
           <Routes>
             {/* Admin Routes with separate Layout */}
             <Route element={<AdminLayout />}>
-              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
             </Route>
 
             {/* Public/User Routes with Main Layout */}
@@ -53,12 +55,13 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/gallary" element={<Gallary />} />
               <Route path="/location" element={<Location />} />
-              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking" element={<ProtectedRoute><Booking /></ProtectedRoute>} />
               <Route path="/login" element={<LoginRegister />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
-              <Route path="/Services" element={<Services />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Suspense>

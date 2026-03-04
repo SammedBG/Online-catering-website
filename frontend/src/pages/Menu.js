@@ -28,15 +28,15 @@ function Menu() {
       <div className="pdf-down">
         <div className="wedding">
         <h1><u>Wedding Event</u></h1>
-        <a href={pdfFile1} download="wedding menu"><i class="fa-solid fa-file-pdf"></i></a>
+        <a href={pdfFile1} download="wedding menu"><i className="fa-solid fa-file-pdf"></i></a>
         </div>
         <div className="wedding">
         <h1><u>Corporate Event </u></h1>
-        <a href={pdfFile2} download="corporate event menu"><i class="fa-solid fa-file-pdf"></i></a>
+        <a href={pdfFile2} download="corporate event menu"><i className="fa-solid fa-file-pdf"></i></a>
         </div>
         <div className="wedding">
         <h1><u>Family Party </u></h1>
-        <a href={pdfFile3} download="Family party menu"><i class="fa-solid fa-file-pdf"></i></a>
+        <a href={pdfFile3} download="Family party menu"><i className="fa-solid fa-file-pdf"></i></a>
         </div>
       </div>
       <div className="menu-section-2">

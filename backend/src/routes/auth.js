@@ -1,5 +1,4 @@
 import express from "express"
-import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { generateAccessToken, generateRefreshToken } from "../utils/jwtUtils.js"
 import User from "../models/User.js"
@@ -16,15 +15,6 @@ const loginLimiter = rateLimit({
   max: 5, // Limit each IP to 5 login requests per windowMs
   message: "Too many login attempts, please try again after 15 minutes",
 })
-
-// Middleware to check if user is admin
-const isAdmin = (req, res, next) => {
-  if (req.user && req.user.role === "admin") {
-    next()
-  } else {
-    res.status(403).json({ message: "Access denied. Admin only." })
-  }
-}
 
 router.post("/register", async (req, res) => {
   try {
@@ -152,11 +142,6 @@ router.get("/user", auth, async (req, res) => {
     console.error(err)
     res.status(500).json({ message: "Server error" })
   }
-})
-
-// Admin-only route example
-router.get("/admin-only", auth, isAdmin, (req, res) => {
-  res.json({ message: "This is an admin-only route" })
 })
 
 export default router

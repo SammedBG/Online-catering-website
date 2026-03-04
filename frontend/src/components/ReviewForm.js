@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { createReview } from "../services/api";
 import "../styles/Review.css";

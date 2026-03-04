@@ -1,5 +1,3 @@
-"use client";
-
 import "../styles/Review.css";
 
 const Reviews = ({ reviews }) => {
