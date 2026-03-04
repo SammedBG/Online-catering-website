@@ -105,7 +105,7 @@ function Services() {
                                 <li>Our courteous staff ensures smooth, quick, and friendly service.</li>
 
                                 <li>Vibrant presentation and themed setups create a lively atmosphere.</li>
-                            </ul></p>
+                            </ul></div>
                         </div>
                         <div className="section-card-3">
                             <img src={event13} alt="card-3" />
