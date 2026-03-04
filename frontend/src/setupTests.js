@@ -1,3 +1,11 @@
+// Polyfill TextEncoder/TextDecoder for jsdom (required by react-router v7)
+const { TextEncoder, TextDecoder } = require('util');
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
+// Mock window.scrollTo (not implemented in jsdom)
+window.scrollTo = jest.fn();
+
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
