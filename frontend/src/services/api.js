@@ -31,7 +31,7 @@ api.interceptors.response.use(
 
     // Skip token refresh if user is not logged in (no refreshToken)
     const refreshToken = localStorage.getItem("refreshToken");
-    if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
+    if (error.response && error.response.status === 401 && !originalRequest._retry && refreshToken) {
       originalRequest._retry = true;
       try {
         const response = await axios.post(`${API_URL}/auth/refresh-token`, { refreshToken });
@@ -82,7 +82,6 @@ export const getAdminBlockedDates = () => api.get("/blocked-dates/admin");
 export const blockDate = (dateData) => api.post("/blocked-dates", dateData);
 export const unblockDate = (id) => api.delete(`/blocked-dates/${id}`);
 
-// Review API calls
 // Review API calls
 export const getReviews = () => api.get("/reviews");
 export const getAdminReviews = () => api.get("/reviews/all");
